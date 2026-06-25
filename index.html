@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LINNÉ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==============================  NAVBAR  ============================== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <div class="nav-left">
+        <button class="nav-btn" aria-label="Menu">
+          <svg width="16" height="11" viewBox="0 0 16 11" fill="none">
+            <line x1="0" y1="0.5"  x2="16" y2="0.5"  stroke="currentColor" stroke-width="1"/>
+            <line x1="0" y1="5.5"  x2="16" y2="5.5"  stroke="currentColor" stroke-width="1"/>
+            <line x1="0" y1="10.5" x2="16" y2="10.5" stroke="currentColor" stroke-width="1"/>
+          </svg>
+          <span>Menu</span>
+        </button>
+        <button class="nav-btn" aria-label="Tìm kiếm">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <span>Tìm kiếm</span>
+        </button>
+      </div>
+      <a href="/" class="nav-logo">LINNÉ</a>
+      <div class="nav-right">
+        <a href="#" class="nav-btn nav-contact">Liên hệ với chúng tôi</a>
+        <button class="nav-icon-btn" aria-label="Yêu thích">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+        </button>
+        <button class="nav-icon-btn" aria-label="Tài khoản">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==============================  HERO  ============================== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img
+        src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=80"
+        alt="LINNÉ — Bộ sưu tập Thu 2026"
+        class="hero-img"
+      >
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-caption">
+      <p class="hero-eyebrow">Mới ra mắt</p>
+      <h1 class="hero-title">Bộ sưu tập Thu 2026</h1>
+      <div class="hero-links">
+        <a href="#" class="hero-link">Khám phá lookbook</a>
+        <span class="hero-link-sep"></span>
+        <a href="#" class="hero-link">Khám phá thêm</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================  CATEGORY SECTIONS  ============================== -->
+  <div class="cat-section">
+
+    <!-- ── CAT 1: Áo linen ── -->
+    <div class="cat-block">
+      <a href="#" class="cat-hero" aria-label="Khám phá Áo linen">
+        <img
+          src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1600&q=80"
+          alt=""
+          class="cat-hero-img"
+          loading="lazy"
+        >
+        <div class="cat-hero-overlay"></div>
+        <div class="cat-hero-label">
+          <div class="cat-label-inner">
+            <div>
+              <p class="cat-eyebrow">48 sản phẩm</p>
+              <h2 class="cat-title">Áo linen</h2>
+            </div>
+            <span class="cat-cta">Xem tất cả</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="cat-products-row">
+        <div class="cat-row-header">
+          <div class="cat-row-left">
+            <span class="cat-row-name">Áo linen</span>
+            <span class="cat-row-sep">·</span>
+            <span class="cat-row-count">48 sản phẩm</span>
+          </div>
+          <div class="cat-row-nav">
+            <button class="scroll-btn js-prev" aria-label="Cuộn trái">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button class="scroll-btn js-next" aria-label="Cuộn phải">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="cat-scroll-viewport">
+        <div class="cat-scroll-track">
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <span class="badge badge-dark product-badge">Mới về</span>
+              <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=500&q=80" alt="Relaxed Linen Shirt" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Áo linen</p>
+              <p class="product-name">Relaxed Linen Shirt</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#111111"></div>
+                <div class="color-dot" style="background:#FAFAF8;border-color:#B2B0AB"></div>
+                <div class="color-dot" style="background:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">890.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1564557287817-3785e38ec1f5?auto=format&fit=crop&w=500&q=80" alt="Washed Linen Top" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Áo linen</p>
+              <p class="product-name">Washed Linen Top</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#111111"></div>
+                <div class="color-dot" style="background:#F4F3F0;border-color:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">790.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <span class="badge badge-sale product-badge">−20%</span>
+              <img src="https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?auto=format&fit=crop&w=500&q=80" alt="Oversized Linen Tee" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Áo linen</p>
+              <p class="product-name">Oversized Linen Tee</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#FAFAF8;border-color:#B2B0AB"></div>
+                <div class="color-dot" style="background:#ECEAE6;border-color:#B2B0AB"></div>
+                <div class="color-dot" style="background:#111111"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">552.000₫</span>
+                <span class="t-price-old">690.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1503342394128-c104d54dba01?auto=format&fit=crop&w=500&q=80" alt="Linen Blouse" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Áo linen</p>
+              <p class="product-name">Linen Blouse</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#F4F3F0;border-color:#B2B0AB"></div>
+                <div class="color-dot" style="background:#767672"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">1.190.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=500&q=80" alt="Cropped Linen Jacket" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Áo linen</p>
+              <p class="product-name">Cropped Linen Jacket</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#111111"></div>
+                <div class="color-dot" style="background:#3A3A38"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">1.590.000₫</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <div class="cat-scroll-progress">
+          <div class="cat-scroll-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- ── CAT 2: Quần & Váy ── -->
+    <div class="cat-block">
+      <a href="#" class="cat-hero" aria-label="Khám phá Quần & Váy">
+        <img
+          src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=1600&q=80"
+          alt=""
+          class="cat-hero-img"
+          loading="lazy"
+        >
+        <div class="cat-hero-overlay"></div>
+        <div class="cat-hero-label">
+          <div class="cat-label-inner">
+            <div>
+              <p class="cat-eyebrow">32 sản phẩm</p>
+              <h2 class="cat-title">Quần &amp; Váy</h2>
+            </div>
+            <span class="cat-cta">Xem tất cả</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="cat-products-row">
+        <div class="cat-row-header">
+          <div class="cat-row-left">
+            <span class="cat-row-name">Quần &amp; Váy</span>
+            <span class="cat-row-sep">·</span>
+            <span class="cat-row-count">32 sản phẩm</span>
+          </div>
+          <div class="cat-row-nav">
+            <button class="scroll-btn js-prev" aria-label="Cuộn trái">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button class="scroll-btn js-next" aria-label="Cuộn phải">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="cat-scroll-viewport">
+        <div class="cat-scroll-track">
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <span class="badge badge-dark product-badge">Mới về</span>
+              <img src="https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?auto=format&fit=crop&w=500&q=80" alt="Wide Linen Trousers" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Quần linen</p>
+              <p class="product-name">Wide Linen Trousers</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#111111"></div>
+                <div class="color-dot" style="background:#F4F3F0;border-color:#B2B0AB"></div>
+                <div class="color-dot" style="background:#ECEAE6;border-color:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">1.090.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1551163943-3f7057fc8a90?auto=format&fit=crop&w=500&q=80" alt="Midi Linen Skirt" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Váy linen</p>
+              <p class="product-name">Midi Linen Skirt</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#ECEAE6;border-color:#B2B0AB"></div>
+                <div class="color-dot" style="background:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">890.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <span class="badge badge-outline product-badge">Limited</span>
+              <img src="https://images.unsplash.com/photo-1592301933927-35b597393c0a?auto=format&fit=crop&w=500&q=80" alt="Linen Midi Dress" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Váy linen</p>
+              <p class="product-name">Linen Midi Dress</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#F4F3F0;border-color:#B2B0AB"></div>
+                <div class="color-dot" style="background:#767672"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">1.490.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1583496661160-fb5218afa9a4?auto=format&fit=crop&w=500&q=80" alt="Relaxed Linen Pants" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Quần linen</p>
+              <p class="product-name">Relaxed Linen Pants</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#111111"></div>
+                <div class="color-dot" style="background:#FAFAF8;border-color:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">990.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1577900232427-18219b9166a0?auto=format&fit=crop&w=500&q=80" alt="Wide Leg Pants" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Quần linen</p>
+              <p class="product-name">Wide Leg Pants</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#111111"></div>
+                <div class="color-dot" style="background:#3A3A38"></div>
+                <div class="color-dot" style="background:#ECEAE6;border-color:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">1.190.000₫</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <div class="cat-scroll-progress">
+          <div class="cat-scroll-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- ── CAT 3: Phụ kiện ── -->
+    <div class="cat-block">
+      <a href="#" class="cat-hero" aria-label="Khám phá Phụ kiện">
+        <img
+          src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=1600&q=80"
+          alt=""
+          class="cat-hero-img"
+          loading="lazy"
+        >
+        <div class="cat-hero-overlay"></div>
+        <div class="cat-hero-label">
+          <div class="cat-label-inner">
+            <div>
+              <p class="cat-eyebrow">24 sản phẩm</p>
+              <h2 class="cat-title">Phụ kiện</h2>
+            </div>
+            <span class="cat-cta">Xem tất cả</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="cat-products-row">
+        <div class="cat-row-header">
+          <div class="cat-row-left">
+            <span class="cat-row-name">Phụ kiện</span>
+            <span class="cat-row-sep">·</span>
+            <span class="cat-row-count">24 sản phẩm</span>
+          </div>
+          <div class="cat-row-nav">
+            <button class="scroll-btn js-prev" aria-label="Cuộn trái">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button class="scroll-btn js-next" aria-label="Cuộn phải">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="cat-scroll-viewport">
+        <div class="cat-scroll-track">
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <span class="badge badge-sale product-badge">−20%</span>
+              <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?auto=format&fit=crop&w=500&q=80" alt="Market Tote Linen" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Túi tote</p>
+              <p class="product-name">Market Tote Linen</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#111111"></div>
+                <div class="color-dot" style="background:#ECEAE6;border-color:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">1.032.000₫</span>
+                <span class="t-price-old">1.290.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?auto=format&fit=crop&w=500&q=80" alt="Bucket Hat Linen" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Mũ linen</p>
+              <p class="product-name">Bucket Hat Linen</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#111111"></div>
+                <div class="color-dot" style="background:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">690.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=500&q=80" alt="Linen Crossbody" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Túi đeo</p>
+              <p class="product-name">Linen Crossbody</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#ECEAE6;border-color:#B2B0AB"></div>
+                <div class="color-dot" style="background:#111111"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">1.390.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?auto=format&fit=crop&w=500&q=80" alt="Linen Scarf" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Khăn linen</p>
+              <p class="product-name">Linen Scarf</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#F4F3F0;border-color:#B2B0AB"></div>
+                <div class="color-dot" style="background:#E0DDD8;border-color:#B2B0AB"></div>
+                <div class="color-dot" style="background:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">490.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=500&q=80" alt="Canvas Pouch" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Túi nhỏ</p>
+              <p class="product-name">Canvas Pouch</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#111111"></div>
+                <div class="color-dot" style="background:#FAFAF8;border-color:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">390.000₫</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <div class="cat-scroll-progress">
+          <div class="cat-scroll-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+
+    <!-- ── CAT 4: Bộ set linen ── -->
+    <div class="cat-block">
+      <a href="#" class="cat-hero" aria-label="Khám phá Bộ set linen">
+        <img
+          src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1600&q=80"
+          alt=""
+          class="cat-hero-img"
+          loading="lazy"
+        >
+        <div class="cat-hero-overlay"></div>
+        <div class="cat-hero-label">
+          <div class="cat-label-inner">
+            <div>
+              <p class="cat-eyebrow">16 sản phẩm</p>
+              <h2 class="cat-title">Bộ set linen</h2>
+            </div>
+            <span class="cat-cta">Xem tất cả</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="cat-products-row">
+        <div class="cat-row-header">
+          <div class="cat-row-left">
+            <span class="cat-row-name">Bộ set linen</span>
+            <span class="cat-row-sep">·</span>
+            <span class="cat-row-count">16 sản phẩm</span>
+          </div>
+          <div class="cat-row-nav">
+            <button class="scroll-btn js-prev" aria-label="Cuộn trái">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button class="scroll-btn js-next" aria-label="Cuộn phải">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="cat-scroll-viewport">
+        <div class="cat-scroll-track">
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <span class="badge badge-dark product-badge">Bestseller</span>
+              <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=500&q=80" alt="Set Áo + Quần" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Bộ set</p>
+              <p class="product-name">Set Áo + Quần</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#111111"></div>
+                <div class="color-dot" style="background:#F4F3F0;border-color:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">1.690.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=500&q=80" alt="Set Blouse + Váy" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Bộ set</p>
+              <p class="product-name">Set Blouse + Váy</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#ECEAE6;border-color:#B2B0AB"></div>
+                <div class="color-dot" style="background:#767672"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">1.890.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=500&q=80" alt="Set Oversized + Wide Leg" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Bộ set</p>
+              <p class="product-name">Set Oversized + Wide Leg</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#111111"></div>
+                <div class="color-dot" style="background:#FAFAF8;border-color:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">1.490.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=500&q=80" alt="Set Jacket + Trousers" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Bộ set</p>
+              <p class="product-name">Set Jacket + Trousers</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#111111"></div>
+                <div class="color-dot" style="background:#3A3A38"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">2.190.000₫</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card">
+            <div class="product-img-wrap">
+              <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=500&q=80" alt="Set Tee + Midi" loading="lazy">
+              <button class="product-wishlist" aria-label="Yêu thích">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </button>
+            </div>
+            <div class="product-info">
+              <p class="product-cat">Bộ set</p>
+              <p class="product-name">Set Tee + Midi</p>
+              <div class="color-swatch-row">
+                <div class="color-dot active" style="background:#F4F3F0;border-color:#B2B0AB"></div>
+                <div class="color-dot" style="background:#ECEAE6;border-color:#B2B0AB"></div>
+              </div>
+              <div class="product-price-row">
+                <span class="t-price">1.290.000₫</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <div class="cat-scroll-progress">
+          <div class="cat-scroll-bar"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
