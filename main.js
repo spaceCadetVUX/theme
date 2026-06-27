@@ -167,6 +167,7 @@ updateNav();
     hd.addEventListener('click', () => {
       if (window.innerWidth > 768) return;
       const group = hd.closest('.mega-group');
+      if (!group.querySelector('.mega-group-links')) return;
       const wasOpen = group.classList.contains('open');
       document.querySelectorAll('.mega-group.open').forEach(g => g.classList.remove('open'));
       if (!wasOpen) group.classList.add('open');
