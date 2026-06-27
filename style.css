@@ -15,6 +15,15 @@
   --warm-white: #FAFAF8;
   --white:      #FFFFFF;
 
+  /* Swatch palette */
+  --swatch-cream:  #F0EBE1;
+  --swatch-camel:  #C9B99A;
+  --swatch-cognac: #7D5A45;
+  --swatch-rust:   #C4713C;
+  --swatch-forest: #2B4A3F;
+  --swatch-slate:  #7B8F96;
+  --swatch-noir:   #1C1C1A;
+
   --font-display: 'Crimson Pro', Georgia, serif;
   --font-body:    'DM Sans', system-ui, sans-serif;
 
@@ -1445,6 +1454,10 @@ img    { display: block; }
 }
 .edit-grid-item:hover .edit-grid-img { transform: scale(1.045); }
 
+.edit-grid-img--linen { background-image: url('https://elleandriley.com/cdn/shop/files/Tile11.jpg?v=1778542404'); }
+.edit-grid-img--pants { background-image: url('https://elleandriley.com/cdn/shop/files/Tile12.jpg?v=1778542436'); }
+.edit-grid-img--set   { background-image: url('https://elleandriley.com/cdn/shop/files/Tile13.jpg?v=1778542464'); }
+
 .edit-grid-item::after {
   content: '';
   position: absolute;
@@ -1636,7 +1649,7 @@ img    { display: block; }
    SHOP SECTION — 4-col product grid
 ============================================ */
 .shop-section {
-  background: #ffffff;
+  background: var(--white);
   padding-bottom: 100px;
 }
 
@@ -1672,12 +1685,12 @@ img    { display: block; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 3px;
-  background: #ffffff;
+  background: var(--white);
   margin-top: 0;
 }
 
 .shop-card {
-  background: #ffffff;
+  background: var(--white);
   cursor: pointer;
   opacity: 0;
   transform: translateY(16px);
@@ -1760,6 +1773,14 @@ img    { display: block; }
 }
 .shop-swatch:hover { box-shadow: 0 0 0 1.5px var(--warm-white), 0 0 0 2.5px var(--graphite); }
 .shop-swatch.active { box-shadow: 0 0 0 1.5px var(--warm-white), 0 0 0 2.5px var(--ink); }
+
+.swatch-cream  { background: var(--swatch-cream); }
+.swatch-camel  { background: var(--swatch-camel); }
+.swatch-cognac { background: var(--swatch-cognac); }
+.swatch-rust   { background: var(--swatch-rust); }
+.swatch-forest { background: var(--swatch-forest); }
+.swatch-slate  { background: var(--swatch-slate); }
+.swatch-noir   { background: var(--swatch-noir); }
 
 @media (max-width: 1024px) {
   .shop-grid { grid-template-columns: repeat(3, 1fr); }
