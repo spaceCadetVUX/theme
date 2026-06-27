@@ -135,53 +135,26 @@ updateNav();
   const megaWrap    = document.getElementById('megaWrap');
   const megaClose   = document.getElementById('megaClose');
   const megaOverlay = document.getElementById('megaOverlay');
-  const cats        = document.querySelectorAll('.mega-cat');
-  const imgs        = document.querySelectorAll('.mega-img');
 
   if (!menuBtn || !megaWrap) return;
 
-  /* Stagger delay tự động theo số lượng danh mục */
-  cats.forEach((cat, i) => {
-    cat.style.setProperty('--stagger-delay', `${0.07 + i * 0.07}s`);
-  });
-
   let open = false;
-  let hoverLocked = false;
-  let hoverTimer = null;
-
-  function resetToFirst() {
-    cats.forEach(c => c.classList.remove('active'));
-    imgs.forEach(i => i.classList.remove('active'));
-    if (cats[0]) { cats[0].classList.add('active'); }
-    const firstImgId = cats[0] && cats[0].dataset.img;
-    if (firstImgId) {
-      const firstImg = document.getElementById(firstImgId);
-      if (firstImg) firstImg.classList.add('active');
-    }
-  }
 
   function openMenu() {
     open = true;
-    resetToFirst();
     megaWrap.classList.add('open');
     navbar.classList.add('menu-open');
     menuBtn.setAttribute('aria-expanded', 'true');
     menuLabel.textContent = 'Fermer';
-    /* Khoá hover trong 480ms — đợi panel animation xong */
-    hoverLocked = true;
-    clearTimeout(hoverTimer);
-    hoverTimer = setTimeout(() => { hoverLocked = false; }, 480);
   }
 
   function closeMenu() {
     open = false;
-    hoverLocked = false;
-    clearTimeout(hoverTimer);
     megaWrap.classList.remove('open');
     navbar.classList.remove('menu-open');
     menuBtn.setAttribute('aria-expanded', 'false');
     menuLabel.textContent = 'Menu';
-    cats.forEach(c => c.classList.remove('sub-open'));
+    document.querySelectorAll('.mega-group.open').forEach(g => g.classList.remove('open'));
   }
 
   menuBtn.addEventListener('click',     () => open ? closeMenu() : openMenu());
@@ -189,35 +162,14 @@ updateNav();
   megaOverlay.addEventListener('click', closeMenu);
   document.addEventListener('keydown',  e => { if (e.key === 'Escape' && open) closeMenu(); });
 
-  /* Image crossfade: hover (desktop) + click (mobile touch) */
-  function activateCat(cat) {
-    if (hoverLocked) return;
-    cats.forEach(c => c.classList.remove('active'));
-    imgs.forEach(i => i.classList.remove('active'));
-    cat.classList.add('active');
-    const img = document.getElementById(cat.dataset.img);
-    if (img) img.classList.add('active');
-  }
-
-  /* Chặn sub-link click bubble lên mega-cat */
-  document.querySelectorAll('.mega-sub').forEach(sub => {
-    sub.addEventListener('click', e => e.stopPropagation());
-  });
-
-  cats.forEach(cat => {
-    cat.addEventListener('mouseenter', () => activateCat(cat));
-    cat.addEventListener('click', (e) => {
-      if (window.innerWidth <= 640) {
-        /* Bỏ qua nếu click từ sub-link bubble lên */
-        if (e.target.closest('.mega-cat-subs')) return;
-        /* Bỏ qua ghost click trong thời gian animation mở menu */
-        if (hoverLocked) return;
-        const wasOpen = cat.classList.contains('sub-open');
-        cats.forEach(c => c.classList.remove('sub-open'));
-        if (!wasOpen) cat.classList.add('sub-open');
-      } else {
-        activateCat(cat);
-      }
+  /* Mobile accordion — group headers */
+  document.querySelectorAll('.mega-group-hd').forEach(hd => {
+    hd.addEventListener('click', () => {
+      if (window.innerWidth > 768) return;
+      const group = hd.closest('.mega-group');
+      const wasOpen = group.classList.contains('open');
+      document.querySelectorAll('.mega-group.open').forEach(g => g.classList.remove('open'));
+      if (!wasOpen) group.classList.add('open');
     });
   });
 }());
@@ -395,7 +347,7 @@ updateNav();
   document.querySelectorAll('.cat-block').forEach(el => blockObs.observe(el));
   document.querySelectorAll('.section-divider').forEach(el => dividerObs.observe(el));
   document.querySelectorAll('.brand-stmt-body, .brand-stmt-cta').forEach(el => blockObs.observe(el));
-  document.querySelectorAll('.edit-grid, .feat-product, .shop-section, .dual-edit, .tiktok-section').forEach(el => blockObs.observe(el));
+  document.querySelectorAll('.edit-grid, .feat-product, .shop-section, .dual-edit, .tiktok-section, .journal-section').forEach(el => blockObs.observe(el));
 }());
 
 /* ---------- TikTok carousel ---------- */
@@ -412,97 +364,196 @@ updateNav();
   ];
 
   const N      = SLIDES.length;
-  const CENTER = 2;
-  let   cur    = 2;
-  let   busy   = false;
+  const CENTER = 2;   // index của DOM item trung tâm trong grid (0-based)
+  let   cur    = 2;   // slide index đang active
+  let   locked = false;
 
-  const items = section.querySelectorAll('.tiktok-item');
-  const dots  = section.querySelectorAll('.tiktok-dot');
+  const track = section.querySelector('.tiktok-track');
+  const items = Array.from(section.querySelectorAll('.tiktok-item'));
+  const dots  = Array.from(section.querySelectorAll('.tiktok-dot'));
+  const card  = section.querySelector('.tiktok-product-card');
   const thumb = section.querySelector('.tiktok-product-thumb');
   const bEl   = section.querySelector('.tiktok-product-brand');
   const nEl   = section.querySelector('.tiktok-product-name');
   const pEl   = section.querySelector('.tiktok-product-price');
-  const card  = section.querySelector('.tiktok-product-card');
-  const track = section.querySelector('.tiktok-track');
 
-  const H_EASE = 'height 0.45s cubic-bezier(0.25,0.1,0.25,1)';
+  /* Scale tương ứng với vị trí grid — không đổi suốt vòng đời */
+  const SCALES = items.map((_, pos) => pos === CENTER ? 1 : 1.10);
 
-  function syncCardWidth() {
-    if (window.innerWidth <= 640 || !items[CENTER] || !card) return;
-    card.style.width = items[CENTER].offsetWidth + 'px';
-  }
-
-  function applyData() {
-    items.forEach((item, pos) => {
-      const idx = ((cur - CENTER + pos) % N + N) % N;
-      const s   = SLIDES[idx];
-      item.querySelector('.tiktok-img').src = s.img;
-      item.querySelector('.tiktok-img').alt = s.name;
-      item.classList.toggle('tiktok-item--active', pos === CENTER);
-    });
+  /* Cập nhật dots + product card (instant, không fade) */
+  function syncBottom() {
+    dots.forEach((d, i) => d.classList.toggle('tiktok-dot--active', i === cur));
     const s = SLIDES[cur];
-    thumb.src = s.img; thumb.alt = s.name;
+    thumb.src       = s.img;
+    thumb.alt       = s.name;
     bEl.textContent = s.brand;
     nEl.textContent = s.name;
     pEl.textContent = s.price;
-    dots.forEach((d, i) => d.classList.toggle('tiktok-dot--active', i === cur));
   }
+
+  /* Đồng bộ width của card với center column */
+  function syncCardWidth() {
+    if (window.innerWidth <= 640 || !card) return;
+    card.style.width = items[CENTER].offsetWidth + 'px';
+  }
+
+  /* Init — set data-pos + src ngay (không animation) */
+  function initData() {
+    items.forEach((item, pos) => {
+      const idx = ((cur - CENTER + pos) % N + N) % N;
+      const s   = SLIDES[idx];
+      item.dataset.pos = pos - CENTER;
+      const img = item.querySelector('.tiktok-img');
+      img.src = s.img;
+      img.alt = s.name;
+    });
+    syncBottom();
+  }
+
+  /* Video auto-play — sẵn sàng khi thay <img> bằng <video class="tiktok-video"> */
+  function syncVideoPlayback() {
+    items.forEach(item => {
+      const video = item.querySelector('.tiktok-video');
+      if (!video) return;
+      parseInt(item.dataset.pos, 10) === 0
+        ? video.play().catch(() => {})
+        : (video.pause(), (video.currentTime = 0));
+    });
+  }
+
+  /* Auto-advance */
+  let autoTimer = null;
+  function startAuto() {
+    clearInterval(autoTimer);
+    autoTimer = setInterval(() => goTo(cur + 1), 5000);
+  }
+  function stopAuto() { clearInterval(autoTimer); }
+
+  /* -------------------------------------------------------
+     Navigate — translateX slide, không opacity, không blink
+     dir +1 = forward (next), dir -1 = backward (prev)
+  ------------------------------------------------------- */
+  const OUT_MS = 220;  // tốc độ trượt ra
+  const IN_MS  = 300;  // tốc độ trượt vào (hơi chậm hơn cho mượt)
 
   function goTo(rawIdx) {
-    if (busy) return;
+    if (locked) return;
     const next = ((rawIdx % N) + N) % N;
     if (next === cur) return;
-    busy = true;
 
-    const dir   = rawIdx >= cur ? 1 : -1;
-    const T_OUT = 180;
-    const T_IN  = 320;
+    const dir = rawIdx > cur ? 1 : -1;
+    locked = true;
 
-    // Phase 1: slide toàn bộ track ra ngoài stage (stage overflow:hidden che lại)
-    track.style.transition = `transform ${T_OUT}ms ease-in`;
-    track.style.transform  = `translateX(${-dir * 100}%)`;
+    // Phase 1: trượt TẤT CẢ ảnh ra ngoài theo hướng dir
+    items.forEach((item, pos) => {
+      const img = item.querySelector('.tiktok-img');
+      img.style.transition = `transform ${OUT_MS}ms linear`;
+      img.style.transform  = `scale(${SCALES[pos]}) translateX(${-dir * 105}%)`;
+    });
 
     setTimeout(() => {
-      // Track đang hoàn toàn ngoài viewport — swap data không nhìn thấy được
+      // ảnh đang ngoài viewport — swap src không nhìn thấy
       cur = next;
-      applyData();
-
-      track.style.transition = 'none';
-      track.style.transform  = `translateX(${dir * 100}%)`;
-
-      // Phase 2: slide track vào từ phía đối diện
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          track.style.transition = `transform ${T_IN}ms cubic-bezier(0.0, 0.0, 0.2, 1)`;
-          track.style.transform  = 'translateX(0)';
-
-          setTimeout(() => {
-            track.style.transition = '';
-            track.style.transform  = '';
-            busy = false;
-          }, T_IN + 30);
-        });
+      items.forEach((item, pos) => {
+        const idx = ((cur - CENTER + pos) % N + N) % N;
+        const s   = SLIDES[idx];
+        const img = item.querySelector('.tiktok-img');
+        img.src = s.img;
+        img.alt = s.name;
+        // đặt sẵn ở phía đối diện, không transition
+        img.style.transition = 'none';
+        img.style.transform  = `scale(${SCALES[pos]}) translateX(${dir * 105}%)`;
       });
-    }, T_OUT + 10);
+
+      syncBottom();
+      syncVideoPlayback();
+      startAuto();
+
+      // Phase 2: trượt vào từ phía đối diện
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        items.forEach((item, pos) => {
+          const img = item.querySelector('.tiktok-img');
+          img.style.transition = `transform ${IN_MS}ms linear`;
+          img.style.transform  = `scale(${SCALES[pos]}) translateX(0)`;
+        });
+
+        // Dọn inline style — disable CSS transition TRƯỚC khi clear transform
+        // để browser không trigger CSS 0.9s ease khi chuyển từ
+        // "scale(X) translateX(0)" → "scale(X)" (nếu không sẽ bị dật ngược)
+        setTimeout(() => {
+          items.forEach(item => {
+            const img = item.querySelector('.tiktok-img');
+            img.style.transition = 'none'; // freeze: CSS transform áp dụng NGAY, không animate
+            img.style.transform  = '';
+            // Restore CSS transition sau 2 frame để hover effect hoạt động trở lại
+            requestAnimationFrame(() => requestAnimationFrame(() => {
+              img.style.transition = '';
+            }));
+          });
+          locked = false;
+        }, IN_MS + 20);
+      }));
+    }, OUT_MS + 8);
   }
 
+  /* --- Events --- */
+
+  /* Arrows */
   section.querySelector('.tiktok-arrow--prev').addEventListener('click', () => goTo(cur - 1));
   section.querySelector('.tiktok-arrow--next').addEventListener('click', () => goTo(cur + 1));
+
+  /* Dots */
   dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
 
-  // swipe
-  let tx = 0;
-  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend',   e => {
+  /* Click side item → navigate đến nó */
+  items.forEach(item => {
+    item.addEventListener('click', () => {
+      const dp = parseInt(item.dataset.pos, 10);
+      if (dp !== 0) goTo(cur + dp);
+    });
+  });
+
+  /* Touch swipe */
+  let tx = 0, ty = 0;
+  track.addEventListener('touchstart', e => {
+    tx = e.touches[0].clientX;
+    ty = e.touches[0].clientY;
+  }, { passive: true });
+  track.addEventListener('touchend', e => {
     const dx = e.changedTouches[0].clientX - tx;
-    if (Math.abs(dx) > 44) goTo(dx < 0 ? cur + 1 : cur - 1);
+    const dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 44) {
+      goTo(dx < 0 ? cur + 1 : cur - 1);
+    }
   }, { passive: true });
 
-  window.addEventListener('resize', syncCardWidth, { passive: true });
+  /* Mouse drag (desktop) */
+  let dragStart = null;
+  track.addEventListener('pointerdown', e => { dragStart = e.clientX; });
+  track.addEventListener('pointerup', e => {
+    if (dragStart === null) return;
+    const dx = e.clientX - dragStart;
+    dragStart = null;
+    if (Math.abs(dx) > 55) goTo(dx < 0 ? cur + 1 : cur - 1);
+  });
+  track.addEventListener('pointerleave', () => { dragStart = null; });
 
-  // Khởi tạo
-  applyData();
+  /* Keyboard */
+  section.setAttribute('tabindex', '-1');
+  section.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft')  goTo(cur - 1);
+    if (e.key === 'ArrowRight') goTo(cur + 1);
+  });
+
+  /* Hover: pause auto-advance */
+  section.addEventListener('mouseenter', stopAuto, { passive: true });
+  section.addEventListener('mouseleave', startAuto, { passive: true });
+
+  /* --- Init --- */
+  initData();
   syncCardWidth();
+  startAuto();
+  window.addEventListener('resize', syncCardWidth, { passive: true });
 }());
 
 /* ---------- Shop tabs ---------- */
