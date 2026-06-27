@@ -568,3 +568,99 @@ updateNav();
     });
   });
 }());
+
+/* ---------- Product Detail Page ---------- */
+(function () {
+  if (!document.querySelector('.pd-section')) return;
+
+  /* ── Sticky info panel (JS simulation — CSS sticky breaks inside ls-active fixed wrap) ──
+     Approach: every rAF, read gallery's current visual rect via getBoundingClientRect().
+     Both .pd-gallery and .pd-info start at the same grid-row Y.
+     Push .pd-info-inner down by delta so its top stays at OFFSET from viewport.
+     Release (stop pushing) when info would overflow gallery bottom.
+  */
+  (function () {
+    if (!document.documentElement.classList.contains('ls-active')) return;
+
+    const info    = document.getElementById('pdInfoInner');
+    const gallery = document.getElementById('pdGallery');
+    if (!info || !gallery) return;
+
+    const navH   = parseFloat(getComputedStyle(document.documentElement)
+                     .getPropertyValue('--nav-h')) || 68;
+    const OFFSET = navH + 28;
+
+    (function tick() {
+      const gr    = gallery.getBoundingClientRect();
+      const infoH = info.offsetHeight;
+
+      const rawDelta = OFFSET - gr.top;                   /* how far to push down */
+      const maxDelta = gr.height - infoH - 24;            /* stop before overflowing gallery */
+      const delta    = Math.max(0, Math.min(rawDelta, maxDelta));
+
+      info.style.transform = `translateY(${delta.toFixed(2)}px)`;
+      requestAnimationFrame(tick);
+    }());
+  }());
+
+  /* ── Colour swatches ── */
+  const swatches   = document.querySelectorAll('.pd-swatch');
+  const colorLabel = document.getElementById('pdColorLabel');
+  swatches.forEach(sw => {
+    sw.addEventListener('click', () => {
+      swatches.forEach(s => { s.classList.remove('active'); s.setAttribute('aria-checked', 'false'); });
+      sw.classList.add('active');
+      sw.setAttribute('aria-checked', 'true');
+      if (colorLabel) colorLabel.textContent = sw.dataset.color;
+    });
+  });
+
+  /* ── Size buttons ── */
+  const sizeBtns = document.querySelectorAll('.pd-size-btn:not(:disabled)');
+  sizeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      sizeBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+
+  /* ── Add to bag ── */
+  const addBtn = document.getElementById('pdAddBtn');
+  if (addBtn) {
+    addBtn.addEventListener('click', () => {
+      addBtn.textContent = 'Đã thêm vào giỏ ✓';
+      addBtn.classList.add('pd-added');
+      addBtn.disabled = true;
+      setTimeout(() => {
+        addBtn.textContent = 'Thêm vào giỏ hàng';
+        addBtn.classList.remove('pd-added');
+        addBtn.disabled = false;
+      }, 2200);
+    });
+  }
+
+  /* ── Wishlist toggle ── */
+  const wishBtn = document.getElementById('pdWishBtn');
+  if (wishBtn) {
+    wishBtn.addEventListener('click', () => {
+      const wished = wishBtn.classList.toggle('pd-wished');
+      wishBtn.setAttribute('aria-pressed', wished ? 'true' : 'false');
+    });
+  }
+
+  /* ── Accordions — one open at a time ── */
+  document.querySelectorAll('.pd-acc-trigger').forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const acc    = trigger.closest('.pd-accordion');
+      const isOpen = acc.classList.contains('pd-open');
+      document.querySelectorAll('.pd-accordion.pd-open').forEach(a => {
+        a.classList.remove('pd-open');
+        a.querySelector('.pd-acc-trigger').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        acc.classList.add('pd-open');
+        trigger.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+}());
