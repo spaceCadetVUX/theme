@@ -2,6 +2,118 @@
    LINNÉ — main.js
 ============================================ */
 
+/* smoothCur: lerp'd scroll position — shared giữa các IIFE */
+let smoothCur = 0;
+
+/* ---------- Lerp Smooth Scroll ---------- */
+(function () {
+  /* Tắt trên thiết bị touch (iOS/Android có native momentum rồi) */
+  if (window.matchMedia('(pointer: coarse)').matches) return;
+  /* Tắt khi user yêu cầu giảm chuyển động */
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const wrap = document.getElementById('smooth-wrap');
+  if (!wrap) return;
+
+  const LERP = 0.08; /* 8% mỗi frame ≈ 300ms để settle — điều chỉnh để thay đổi độ "nhớt" */
+  let cur = 0;       /* vị trí hiển thị hiện tại */
+  let tgt = 0;       /* scroll target thực */
+
+  /* Cho html biết tổng chiều cao content → scrollbar đúng kích thước */
+  function syncHeight() {
+    document.documentElement.style.height = wrap.scrollHeight + 'px';
+  }
+  syncHeight();
+  new ResizeObserver(syncHeight).observe(wrap);  /* cập nhật khi font/ảnh load xong */
+  window.addEventListener('resize', syncHeight, { passive: true });
+
+  /* Kích hoạt CSS rules (html.ls-active) — đặt sau syncHeight để đo trước khi layout đổi */
+  document.documentElement.classList.add('ls-active');
+
+  window.addEventListener('scroll', () => { tgt = window.scrollY; }, { passive: true });
+
+  (function tick() {
+    cur += (tgt - cur) * LERP;
+    /* Snap khi gần tới đích — tránh rAF loop chạy vô tận với micro-delta */
+    if (Math.abs(tgt - cur) < 0.05) cur = tgt;
+    smoothCur = cur; /* expose ra module scope cho các IIFE khác đọc */
+    wrap.style.transform = `translateY(${-cur}px)`;
+    requestAnimationFrame(tick);
+  }());
+}());
+
+/* ---------- Hero Logo: shrink on scroll → nav-logo fade in ---------- */
+(function () {
+  const heroLogoWrap = document.querySelector('.hero-logo-wrap');
+  const navLogo      = document.querySelector('.nav-logo');
+  if (!heroLogoWrap || !navLogo) return;
+
+  /* Nav logo ẩn lúc đầu — hero logo đang hiện */
+  navLogo.style.transition = 'none'; /* tắt CSS transition, JS lo animation */
+  navLogo.style.opacity    = '0';
+
+  /* Khoảng scroll để hoàn thành transition: 0 → 40% viewport height */
+  const FADE_END = window.innerHeight * 0.40;
+
+  /* Expo-out: nhanh lúc đầu, chậm dần khi settle — feel luxury */
+  function expoOut(t) {
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+  }
+
+  function update() {
+    const t     = Math.min(1, Math.max(0, window.scrollY / FADE_END));
+    const e     = expoOut(t);
+
+    /* Effect B — Blur dissolve:
+       opacity tan nhanh, scale thu nhẹ (1→0.93), blur tăng dần (0→12px) */
+    heroLogoWrap.style.opacity   = Math.max(0, 1 - e * 1.7).toFixed(4);
+    heroLogoWrap.style.transform = `scale(${(1 - e * 0.07).toFixed(4)})`;
+    heroLogoWrap.style.filter    = `blur(${(e * 12).toFixed(2)}px)`;
+
+    /* Nav logo fade in sau một chút — tránh overlap lộ liễu */
+    navLogo.style.opacity = Math.min(1, Math.max(0, (e - 0.18) * 1.4)).toFixed(4);
+  }
+
+  window.addEventListener('scroll', update, { passive: true });
+  update(); /* chạy ngay để set trạng thái ban đầu */
+
+  /* Khôi phục transition cho nav logo sau khi JS đã set initial state */
+  requestAnimationFrame(() => {
+    navLogo.style.transition = '';
+  });
+}());
+
+/* ---------- Hero Caption: sticky bottom-of-viewport → dock tại đáy hero ---------- */
+(function () {
+  /* Chỉ chạy khi lerp scroll active (desktop, pointer: fine) */
+  if (!document.documentElement.classList.contains('ls-active')) return;
+
+  const hero    = document.getElementById('hero');
+  const caption = document.querySelector('.hero-caption');
+  if (!hero || !caption) return;
+
+  const MARGIN = 80; /* px từ bottom — đồng bộ với CSS bottom: 80px */
+
+  (function tick() {
+    const heroH    = hero.offsetHeight;       /* 130vh trong px */
+    const captionH = caption.offsetHeight;
+
+    /* Vị trí tự nhiên: đáy hero - 80px */
+    const naturalTop = heroH - captionH - MARGIN;
+
+    /* Vị trí sticky: đáy viewport - 80px, bù trừ theo lerp offset */
+    /* Khi smoothCur = 0  → top = viewportH - captionH - 80  (đáy màn hình) */
+    /* Khi smoothCur = 30vh → top = naturalTop               (vừa chạm đáy hero) */
+    const stickyTop = window.innerHeight - captionH - MARGIN + smoothCur;
+
+    /* Lấy giá trị nhỏ hơn: sticky kéo xuống nhưng không vượt quá đáy hero */
+    caption.style.bottom = 'auto';
+    caption.style.top    = Math.min(naturalTop, stickyTop) + 'px';
+
+    requestAnimationFrame(tick);
+  }());
+}());
+
 /* ---------- Navbar: transparent ↔ filled ---------- */
 const navbar = document.getElementById('navbar');
 
@@ -143,8 +255,8 @@ updateNav();
   const COUNT = COLS * ROWS;
 
   /* Size ảnh theo màn hình */
-  const IMG_MIN = vw <= 640 ? 46 : vw <= 1024 ? 58 : 66;
-  const IMG_MAX = vw <= 640 ? 78 : vw <= 1024 ? 94 : 114;
+  const IMG_MIN = vw <= 640 ? 28 : vw <= 1024 ? 58 : 66;
+  const IMG_MAX = vw <= 640 ? 48 : vw <= 1024 ? 94 : 114;
 
   const shuffled = POOL.slice().sort(() => Math.random() - 0.5);
 
@@ -283,4 +395,17 @@ updateNav();
   document.querySelectorAll('.cat-block').forEach(el => blockObs.observe(el));
   document.querySelectorAll('.section-divider').forEach(el => dividerObs.observe(el));
   document.querySelectorAll('.brand-stmt-body, .brand-stmt-cta').forEach(el => blockObs.observe(el));
+  document.querySelectorAll('.edit-grid, .feat-product, .shop-section').forEach(el => blockObs.observe(el));
+}());
+
+/* ---------- Shop tabs ---------- */
+(function () {
+  const tabs = document.querySelectorAll('.shop-tab');
+  if (!tabs.length) return;
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+    });
+  });
 }());

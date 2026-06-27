@@ -6,7 +6,7 @@
   <title>LINNÉ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -160,16 +160,25 @@
   </div>
   <div class="mega-overlay" id="megaOverlay"></div>
 
+  <!-- smooth-wrap: tất cả section scrollable — navbar/mega nằm ngoài (fixed) -->
+  <div id="smooth-wrap">
+
   <!-- ==============================  HERO  ============================== -->
   <section class="hero" id="hero">
     <div class="hero-bg">
       <img
-        src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1920&q=80"
+        src="https://wonder-theme-fashion.myshopify.com/cdn/shop/files/5-velour-main-banner-image-desktop.jpg?v=1754861835&width=1920"
         alt="LINNÉ — Bộ sưu tập Thu 2026"
         class="hero-img"
       >
     </div>
     <div class="hero-overlay"></div>
+
+    <!-- Logo to lớn tại hero — JS thu nhỏ khi scroll, nav-logo sẽ fade in thay thế -->
+    <div class="hero-logo-wrap" aria-hidden="true">
+      <span class="hero-logo-text">LINNÉ</span>
+    </div>
+
     <div class="hero-caption">
       <p class="hero-eyebrow">Mới ra mắt</p>
       <h1 class="hero-title">Bộ sưu tập Thu 2026</h1>
@@ -199,6 +208,145 @@
       </div>
     </div>
   </section>
+
+  <!-- ==============================  EDITORIAL GRID  ============================== -->
+  <section class="edit-grid" id="editGrid">
+    <a href="#" class="edit-grid-item">
+      <div class="edit-grid-img" style="background-image:url('https://elleandriley.com/cdn/shop/files/Tile11.jpg?v=1778542404')"></div>
+      <div class="edit-grid-label">
+        <span class="edit-grid-name">Áo linen</span>
+        <span class="edit-grid-cta">Khám phá</span>
+      </div>
+    </a>
+    <a href="#" class="edit-grid-item">
+      <div class="edit-grid-img" style="background-image:url('https://elleandriley.com/cdn/shop/files/Tile12.jpg?v=1778542436')"></div>
+      <div class="edit-grid-label">
+        <span class="edit-grid-name">Quần &amp; Váy</span>
+        <span class="edit-grid-cta">Khám phá</span>
+      </div>
+    </a>
+    <a href="#" class="edit-grid-item">
+      <div class="edit-grid-img" style="background-image:url('https://elleandriley.com/cdn/shop/files/Tile13.jpg?v=1778542464')"></div>
+      <div class="edit-grid-label">
+        <span class="edit-grid-name">Bộ set linen</span>
+        <span class="edit-grid-cta">Khám phá</span>
+      </div>
+    </a>
+  </section>
+
+  <!-- ==============================  FEATURED PRODUCT  ============================== -->
+  <section class="feat-product" id="featProduct">
+    <div class="feat-product-left">
+      <img
+        src="https://elleandriley.com/cdn/shop/files/Cashmere_Crew_Camel3.jpg?v=1779070696&width=2160"
+        alt="LINNÉ — Đầm linen cổ chữ V"
+        class="feat-product-editorial"
+      >
+    </div>
+    <div class="feat-product-right">
+      <p class="feat-product-eyebrow">Sản phẩm mới</p>
+      <h2 class="feat-product-name">ĐẦM LINEN<br>CỔ CHỮ V</h2>
+      <div class="feat-product-meta">
+        <span class="feat-product-price">1.290.000 ₫</span>
+        <a href="#" class="feat-product-shop">Mua ngay</a>
+      </div>
+      <div class="feat-product-thumb-wrap">
+        <img
+          src="https://elleandriley.com/cdn/shop/files/Bandana-Scarf-Sand-Cream3.jpg?v=1781216151&width=2160"
+          alt="Đầm linen cổ chữ V — chi tiết sản phẩm"
+          class="feat-product-thumb"
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- ==============================  SHOP GRID  ============================== -->
+  <section class="shop-section" id="shopSection">
+    <div class="shop-header">
+      <nav class="shop-tabs">
+        <button class="shop-tab active">Áo linen</button>
+        <button class="shop-tab">Áo khoác</button>
+        <button class="shop-tab">Quần &amp; Váy</button>
+      </nav>
+    </div>
+
+    <div class="shop-grid">
+
+      <div class="shop-card">
+        <div class="shop-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=600&q=80" alt="Áo linen cổ chữ V" class="shop-card-img">
+        </div>
+        <div class="shop-card-info">
+          <div class="shop-card-row">
+            <span class="shop-card-name">Áo linen cổ chữ V</span>
+            <span class="shop-card-price">660.000 ₫</span>
+          </div>
+          <div class="shop-card-swatches">
+            <span class="shop-swatch active" style="background:#F0EBE1"></span>
+            <span class="shop-swatch" style="background:#2B4A3F"></span>
+            <span class="shop-swatch" style="background:#7B8F96"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="shop-card">
+        <div class="shop-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?auto=format&fit=crop&w=600&q=80" alt="Áo blouse thắt nơ" class="shop-card-img">
+        </div>
+        <div class="shop-card-info">
+          <div class="shop-card-row">
+            <span class="shop-card-name">Áo blouse thắt nơ</span>
+            <span class="shop-card-price">720.000 ₫</span>
+          </div>
+          <div class="shop-card-swatches">
+            <span class="shop-swatch" style="background:#F0EBE1"></span>
+            <span class="shop-swatch active" style="background:#C9B99A"></span>
+            <span class="shop-swatch" style="background:#7D5A45"></span>
+            <span class="shop-swatch" style="background:#1C1C1A"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="shop-card">
+        <div class="shop-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=600&q=80" alt="Áo crop linen" class="shop-card-img">
+          <span class="shop-badge">Mới</span>
+        </div>
+        <div class="shop-card-info">
+          <div class="shop-card-row">
+            <span class="shop-card-name">Áo crop linen</span>
+            <span class="shop-card-price">620.000 ₫</span>
+          </div>
+          <div class="shop-card-swatches">
+            <span class="shop-swatch" style="background:#F0EBE1"></span>
+            <span class="shop-swatch active" style="background:#C4713C"></span>
+            <span class="shop-swatch" style="background:#1C1C1A"></span>
+            <span class="shop-swatch" style="background:#2B4A3F"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="shop-card">
+        <div class="shop-card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1564584217132-2271feaeb3c5?auto=format&fit=crop&w=600&q=80" alt="Áo linen oversized" class="shop-card-img">
+        </div>
+        <div class="shop-card-info">
+          <div class="shop-card-row">
+            <span class="shop-card-name">Áo linen oversized</span>
+            <span class="shop-card-price">680.000 ₫</span>
+          </div>
+          <div class="shop-card-swatches">
+            <span class="shop-swatch active" style="background:#F0EBE1"></span>
+            <span class="shop-swatch" style="background:#7B8F96"></span>
+            <span class="shop-swatch" style="background:#1C1C1A"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  </div><!-- /#smooth-wrap -->
 
   <script src="main.js"></script>
 </body>
