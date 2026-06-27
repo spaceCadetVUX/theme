@@ -395,7 +395,114 @@ updateNav();
   document.querySelectorAll('.cat-block').forEach(el => blockObs.observe(el));
   document.querySelectorAll('.section-divider').forEach(el => dividerObs.observe(el));
   document.querySelectorAll('.brand-stmt-body, .brand-stmt-cta').forEach(el => blockObs.observe(el));
-  document.querySelectorAll('.edit-grid, .feat-product, .shop-section').forEach(el => blockObs.observe(el));
+  document.querySelectorAll('.edit-grid, .feat-product, .shop-section, .dual-edit, .tiktok-section').forEach(el => blockObs.observe(el));
+}());
+
+/* ---------- TikTok carousel ---------- */
+(function () {
+  const section = document.getElementById('tiktokSection');
+  if (!section) return;
+
+  const SLIDES = [
+    { img: 'https://elleandriley.com/cdn/shop/files/Slim_tee_Pale_Blue.jpg?v=1778216637&width=2160',       brand: 'LINNÉ', name: 'Áo linen cổ chữ V',   price: '660.000 ₫'   },
+    { img: 'https://elleandriley.com/cdn/shop/files/Slim_Tee_BrownMelange2.jpg?v=1778217470&width=2160',  brand: 'LINNÉ', name: 'Áo blouse thắt nơ',    price: '720.000 ₫'   },
+    { img: 'https://elleandriley.com/cdn/shop/files/Cashmere_Crew_Camel3.jpg?v=1779070696&width=2160',    brand: 'LINNÉ', name: 'Đầm linen cổ chữ V',   price: '1.290.000 ₫' },
+    { img: 'https://elleandriley.com/cdn/shop/files/Slim_Tee_BrownMelange.jpg?v=1778217470&width=2160',   brand: 'LINNÉ', name: 'Áo crop linen',         price: '620.000 ₫'   },
+    { img: 'https://elleandriley.com/cdn/shop/files/Slim_Tee_Birch.jpg?v=1778217589&width=2160',          brand: 'LINNÉ', name: 'Áo linen oversized',    price: '680.000 ₫'   },
+  ];
+
+  const N      = SLIDES.length;
+  const CENTER = 2;
+  let   cur    = 2;
+  let   busy   = false;
+
+  const items = section.querySelectorAll('.tiktok-item');
+  const dots  = section.querySelectorAll('.tiktok-dot');
+  const thumb = section.querySelector('.tiktok-product-thumb');
+  const bEl   = section.querySelector('.tiktok-product-brand');
+  const nEl   = section.querySelector('.tiktok-product-name');
+  const pEl   = section.querySelector('.tiktok-product-price');
+  const card  = section.querySelector('.tiktok-product-card');
+  const track = section.querySelector('.tiktok-track');
+
+  const H_EASE = 'height 0.45s cubic-bezier(0.25,0.1,0.25,1)';
+
+  function syncCardWidth() {
+    if (window.innerWidth <= 640 || !items[CENTER] || !card) return;
+    card.style.width = items[CENTER].offsetWidth + 'px';
+  }
+
+  function applyData() {
+    items.forEach((item, pos) => {
+      const idx = ((cur - CENTER + pos) % N + N) % N;
+      const s   = SLIDES[idx];
+      item.querySelector('.tiktok-img').src = s.img;
+      item.querySelector('.tiktok-img').alt = s.name;
+      item.classList.toggle('tiktok-item--active', pos === CENTER);
+    });
+    const s = SLIDES[cur];
+    thumb.src = s.img; thumb.alt = s.name;
+    bEl.textContent = s.brand;
+    nEl.textContent = s.name;
+    pEl.textContent = s.price;
+    dots.forEach((d, i) => d.classList.toggle('tiktok-dot--active', i === cur));
+  }
+
+  function goTo(rawIdx) {
+    if (busy) return;
+    const next = ((rawIdx % N) + N) % N;
+    if (next === cur) return;
+    busy = true;
+
+    const dir   = rawIdx >= cur ? 1 : -1;
+    const T_OUT = 180;
+    const T_IN  = 320;
+
+    // Phase 1: slide toàn bộ track ra ngoài stage (stage overflow:hidden che lại)
+    track.style.transition = `transform ${T_OUT}ms ease-in`;
+    track.style.transform  = `translateX(${-dir * 100}%)`;
+
+    setTimeout(() => {
+      // Track đang hoàn toàn ngoài viewport — swap data không nhìn thấy được
+      cur = next;
+      applyData();
+
+      track.style.transition = 'none';
+      track.style.transform  = `translateX(${dir * 100}%)`;
+
+      // Phase 2: slide track vào từ phía đối diện
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          track.style.transition = `transform ${T_IN}ms cubic-bezier(0.0, 0.0, 0.2, 1)`;
+          track.style.transform  = 'translateX(0)';
+
+          setTimeout(() => {
+            track.style.transition = '';
+            track.style.transform  = '';
+            busy = false;
+          }, T_IN + 30);
+        });
+      });
+    }, T_OUT + 10);
+  }
+
+  section.querySelector('.tiktok-arrow--prev').addEventListener('click', () => goTo(cur - 1));
+  section.querySelector('.tiktok-arrow--next').addEventListener('click', () => goTo(cur + 1));
+  dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+  // swipe
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend',   e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    if (Math.abs(dx) > 44) goTo(dx < 0 ? cur + 1 : cur - 1);
+  }, { passive: true });
+
+  window.addEventListener('resize', syncCardWidth, { passive: true });
+
+  // Khởi tạo
+  applyData();
+  syncCardWidth();
 }());
 
 /* ---------- Shop tabs ---------- */

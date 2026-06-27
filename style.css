@@ -1418,6 +1418,111 @@ img    { display: block; }
 }
 
 /* ============================================
+   DUAL EDITORIAL — 50/50 split
+============================================ */
+.dual-edit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: min(92vh, 880px);
+  min-height: 480px;
+  gap: 3px;
+  background: var(--stone);
+}
+
+.dual-edit-item {
+  position: relative;
+  overflow: hidden;
+  background: var(--stone);
+}
+
+.dual-edit-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.dual-edit-item:hover .dual-edit-img { transform: scale(1.04); }
+
+.dual-edit-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.62) 0%,
+    rgba(0,0,0,0.22) 38%,
+    transparent 62%
+  );
+  pointer-events: none;
+}
+
+.dual-edit-content {
+  position: absolute;
+  bottom: 52px;
+  left: 44px;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.85s ease 0.15s, transform 0.85s ease 0.15s;
+}
+.dual-edit.in-view .dual-edit-content { opacity: 1; transform: translateY(0); }
+
+.dual-edit-eyebrow {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 14px;
+}
+
+.dual-edit-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 3.5vw, 56px);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.05;
+  margin-bottom: 28px;
+}
+
+.dual-edit-btn {
+  display: inline-block;
+  padding: 11px 22px;
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: background 0.22s ease, color 0.22s ease;
+}
+.dual-edit-btn:hover {
+  background: var(--ink);
+  color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .dual-edit {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: auto;
+  }
+  .dual-edit-item          { height: 72vw; min-height: 300px; }
+  .dual-edit-content       { bottom: 36px; left: 28px; }
+  .dual-edit-title         { font-size: clamp(24px, 7vw, 38px); }
+}
+
+@media (max-width: 640px) {
+  .dual-edit-item    { height: 85vw; }
+  .dual-edit-content { bottom: 28px; left: 22px; }
+}
+
+/* ============================================
    EDITORIAL GRID — 3-column category showcase
 ============================================ */
 .edit-grid {
@@ -1649,6 +1754,7 @@ img    { display: block; }
    SHOP SECTION — 4-col product grid
 ============================================ */
 .shop-section {
+  padding-top: 80px;
   background: var(--white);
   padding-bottom: 100px;
 }
@@ -1796,6 +1902,225 @@ img    { display: block; }
   .shop-card-info { padding: 10px 12px 16px; }
   .shop-card-name { font-size: 9px; }
   .shop-card-price { font-size: 11px; }
+}
+
+/* ============================================
+   TIKTOK INSPIRATION — video carousel
+============================================ */
+.tiktok-section {
+  background: var(--white);
+  padding-bottom: 80px;
+}
+
+.tiktok-header {
+  text-align: center;
+  padding: 80px var(--pad-x) 40px;
+}
+
+.tiktok-eyebrow {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ash);
+  margin-bottom: 12px;
+}
+
+.tiktok-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 50px);
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.tiktok-stage { position: relative; overflow: hidden; }
+
+.tiktok-track {
+  display: grid;
+  grid-template-columns: 0.62fr 0.84fr 1fr 0.84fr 0.62fr;
+  height: min(68vh, 560px);
+  min-height: 360px;
+  gap: 3px;
+  background: var(--white);
+  align-items: end;
+  overflow: hidden;
+}
+
+.tiktok-item {
+  position: relative;
+  overflow: hidden;
+  background: var(--white);
+  cursor: pointer;
+  height: 88%;
+  transition: height 0.45s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.tiktok-item--active { height: 100%; }
+
+.tiktok-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.9s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+.tiktok-item:hover .tiktok-img { transform: scale(1.03); }
+
+.tiktok-item--active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.15);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.tiktok-ctrl {
+  position: absolute;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.tiktok-ctrl:hover { opacity: 0.7; }
+
+.tiktok-ctrl--play {
+  top: 12px;
+  left: 12px;
+  background: rgba(255,255,255,0.92);
+  color: var(--ink);
+}
+
+.tiktok-ctrl--mute {
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0,0,0,0.45);
+  color: var(--white);
+}
+
+.tiktok-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.88);
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.10);
+  transition: background 0.2s ease;
+}
+.tiktok-arrow:hover { background: var(--white); }
+.tiktok-arrow--prev { left: 16px; }
+.tiktok-arrow--next { right: 16px; }
+
+.tiktok-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding-top: 14px;
+}
+
+.tiktok-product-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--white);
+  border: 0.5px solid var(--pebble);
+  min-width: 260px;
+  transition: opacity 0.22s ease;
+}
+
+.tiktok-product-thumb {
+  width: 50px;
+  height: 64px;
+  object-fit: cover;
+  object-position: center top;
+  flex-shrink: 0;
+  background: var(--stone);
+}
+
+.tiktok-product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tiktok-product-brand {
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ash);
+}
+
+.tiktok-product-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.tiktok-product-price {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--graphite);
+}
+
+.tiktok-dots { display: flex; align-items: center; gap: 8px; }
+
+.tiktok-dot {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--pebble);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.tiktok-dot--active { background: var(--ink); }
+
+@media (max-width: 1024px) {
+  .tiktok-header { padding: 60px var(--pad-x) 32px; }
+  .tiktok-track {
+    grid-template-columns: 1fr 1.2fr 1fr;
+    height: min(60vh, 480px);
+  }
+  .tiktok-track .tiktok-item:first-child,
+  .tiktok-track .tiktok-item:last-child { display: none; }
+}
+
+@media (max-width: 640px) {
+  .tiktok-header { padding: 56px 24px 28px; }
+  .tiktok-track {
+    grid-template-columns: 1fr;
+    height: 85vw;
+    max-height: 480px;
+  }
+  .tiktok-track .tiktok-item { display: none; }
+  .tiktok-track .tiktok-item--active { display: block; }
+  .tiktok-arrow { width: 32px; height: 32px; }
+  .tiktok-product-card { width: 90%; max-width: 340px; }
 }
 
 /* ============================================
