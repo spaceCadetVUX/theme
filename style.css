@@ -2644,12 +2644,11 @@ html.ls-active #smooth-wrap {
 
 /* ── Gallery column: vertical image strip ── */
 .pd-gallery {
-  /* padding-right leaves gap before info panel */
   padding-left: var(--pad-x);
   padding-right: 20px;
   display: flex;
   flex-direction: column;
-  gap: 4px;                 /* tight gap — near-seamless strip */
+  gap: 4px;
 }
 
 /* Each image block */
