@@ -15,7 +15,7 @@ let smoothCur = 0;
   const wrap = document.getElementById('smooth-wrap');
   if (!wrap) return;
 
-  const LERP = 0.08; /* 8% mỗi frame ≈ 300ms để settle — điều chỉnh để thay đổi độ "nhớt" */
+  const LERP = 0.1; /* 8% mỗi frame ≈ 300ms để settle — điều chỉnh để thay đổi độ "nhớt" */
   let cur = 0;       /* vị trí hiển thị hiện tại */
   let tgt = 0;       /* scroll target thực */
 
@@ -117,8 +117,10 @@ let smoothCur = 0;
 /* ---------- Navbar: transparent ↔ filled ---------- */
 const navbar = document.getElementById('navbar');
 
+var isStaticPage = !!document.querySelector('.pd-section') || document.body.classList.contains('page-pd');
+
 function updateNav() {
-  navbar.classList.toggle('filled', window.scrollY > 10);
+  navbar.classList.toggle('filled', isStaticPage || window.scrollY > 10);
 }
 
 window.addEventListener('scroll', updateNav, { passive: true });
@@ -175,152 +177,82 @@ updateNav();
   });
 }());
 
-/* ---------- Float: random inject + continuous drift ---------- */
+/* ---------- Mega menu: col 3 dynamic products ---------- */
 (function () {
-  const section = document.getElementById('floatSection');
-  if (!section) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.innerWidth <= 768) return;
 
-  /* Pool 16 ảnh fashion/linen */
-  const POOL = [
-    'photo-1539109136881-3be0616acf4b',
-    'photo-1558618666-fcd25c85cd64',
-    'photo-1434389677669-e08b4cac3105',
-    'photo-1469334031218-e382a71b716b',
-    'photo-1512436991641-6745cdb1723f',
-    'photo-1485230895905-ec40ba36b9bc',
-    'photo-1564584217132-2271feaeb3c5',
-    'photo-1551232864-3f0890e1776f',
-    'photo-1583496661160-fb5218e41f8c',
-    'photo-1509631179647-0177331693ae',
-    'photo-1548036328-c9fa89d128fa',
-    'photo-1553062407-98eeb64c6a62',
-    'photo-1515886657613-9f3515b0c78f',
-    'photo-1594938298603-c8148c4b4a9c',
-    'photo-1490481651871-ab68de25d43d',
-    'photo-1558769132-cb1aea458c5e',
-  ];
+  var grid    = document.getElementById('megaProductGrid');
+  var eyebrow = document.getElementById('megaProductsEyebrow');
+  if (!grid) return;
 
-  /* Grid responsive theo breakpoint */
-  const vw = window.innerWidth;
-  const COLS = vw <= 640 ? 3 : vw <= 1024 ? 4 : 6;
-  const ROWS = vw <= 640 ? 6 : vw <= 1024 ? 7 : 8;
-  const COUNT = COLS * ROWS;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.mega-product-card'));
+  if (!cards.length) return;
 
-  /* Size ảnh theo màn hình */
-  const IMG_MIN = vw <= 640 ? 28 : vw <= 1024 ? 58 : 66;
-  const IMG_MAX = vw <= 640 ? 48 : vw <= 1024 ? 94 : 114;
+  var B  = 'https://elleandriley.com/cdn/shop/files/';
+  var qPB  = 'Slim_tee_Pale_Blue.jpg?v=1778216637&width=600';
+  var qPM2 = 'Slim_Tee_BrownMelange2.jpg?v=1778217470&width=600';
+  var qPM  = 'Slim_Tee_BrownMelange.jpg?v=1778217470&width=600';
+  var qBi  = 'Slim_Tee_Birch.jpg?v=1778217589&width=600';
+  var qSc  = 'Bandana-Scarf-Sand-Cream3.jpg?v=1781216151&width=600';
+  var qCa  = 'Cashmere_Crew_Camel3.jpg?v=1779070696&width=600';
 
-  const shuffled = POOL.slice().sort(() => Math.random() - 0.5);
+  var DATA = {
+    'ao-linen':      [{ img: qPB,  name: 'Áo linen cổ chữ V' },   { img: qPM2, name: 'Áo blouse thắt nơ' },    { img: qBi,  name: 'Áo linen oversized' },    { img: qCa,  name: 'Áo cashmere camel' }],
+    'ao-blouse':     [{ img: qPM2, name: 'Áo blouse thắt nơ' },   { img: qPB,  name: 'Áo blouse xanh nhạt' },  { img: qPM,  name: 'Áo blouse nâu' },          { img: qBi,  name: 'Áo blouse trắng' }],
+    'ao-phong':      [{ img: qPB,  name: 'Áo phông xanh nhạt' },  { img: qPM,  name: 'Áo phông nâu' },         { img: qBi,  name: 'Áo phông trắng' },         { img: qCa,  name: 'Áo phông camel' }],
+    'ao-khoac':      [{ img: qCa,  name: 'Áo khoác cashmere' },   { img: qBi,  name: 'Áo khoác linen trắng' }, { img: qPM2, name: 'Cardigan nâu đậm' },        { img: qPB,  name: 'Áo khoác xanh nhạt' }],
+    'quan-au':       [{ img: qPM,  name: 'Quần âu nâu' },         { img: qBi,  name: 'Quần âu trắng' },        { img: qCa,  name: 'Quần âu camel' },           { img: qPB,  name: 'Quần âu xanh' }],
+    'wide-leg':      [{ img: qPM2, name: 'Wide leg nâu đậm' },    { img: qPB,  name: 'Wide leg xanh nhạt' },   { img: qCa,  name: 'Wide leg camel' },          { img: qBi,  name: 'Wide leg trắng' }],
+    'vay-midi':      [{ img: qSc,  name: 'Váy midi sand' },       { img: qPB,  name: 'Váy midi xanh nhạt' },   { img: qPM,  name: 'Váy midi nâu' },            { img: qBi,  name: 'Váy midi trắng' }],
+    'vay-maxi':      [{ img: qBi,  name: 'Váy maxi trắng' },      { img: qPM2, name: 'Váy maxi nâu đậm' },    { img: qPB,  name: 'Váy maxi xanh' },           { img: qCa,  name: 'Váy maxi camel' }],
+    'set-quan':      [{ img: qPB,  name: 'Set linen xanh nhạt' }, { img: qBi,  name: 'Set linen trắng' },      { img: qPM,  name: 'Set linen nâu' },           { img: qCa,  name: 'Set linen camel' }],
+    'set-vay':       [{ img: qPM2, name: 'Set blouse + váy nâu' },{ img: qSc,  name: 'Set blouse + váy sand' },{ img: qBi,  name: 'Set blouse trắng' },        { img: qPB,  name: 'Set blouse xanh' }],
+    'set-oversized': [{ img: qCa,  name: 'Set oversized camel' },  { img: qPM,  name: 'Set oversized nâu' },   { img: qPB,  name: 'Set oversized xanh' },      { img: qBi,  name: 'Set oversized trắng' }],
+    'tui-tote':      [{ img: qSc,  name: 'Túi tote sand' },       { img: qBi,  name: 'Túi tote trắng' },       { img: qPB,  name: 'Túi tote xanh' },           { img: qCa,  name: 'Túi tote camel' }],
+    'mu-linen':      [{ img: qSc,  name: 'Mũ linen sand' },       { img: qPB,  name: 'Mũ linen xanh' },        { img: qBi,  name: 'Mũ linen trắng' },          { img: qPM,  name: 'Mũ linen nâu' }],
+    'khan':          [{ img: qSc,  name: 'Khăn bandana sand' },   { img: qCa,  name: 'Khăn cashmere camel' },  { img: qPB,  name: 'Túi đeo xanh nhạt' },       { img: qBi,  name: 'Túi đeo trắng' }],
+  };
 
-  const frag    = document.createDocumentFragment();
-  const topPcts = [];
+  var currentCat = null;
+  var swapTimer  = null;
 
-  const cellW    = 88 / COLS;
-  const topRange = 140;
-  const cellH    = topRange / ROWS;
+  function swap(cat, label) {
+    if (cat === currentCat) return;
+    currentCat = cat;
+    var products = DATA[cat];
+    if (!products) return;
 
-  for (let i = 0; i < COUNT; i++) {
-    const col = i % COLS;
-    const row = Math.floor(i / COLS);
+    clearTimeout(swapTimer);
 
-    const el  = document.createElement('div');
-    el.className = 'float-img';
-
-    const w   = IMG_MIN + Math.random() * (IMG_MAX - IMG_MIN);
-    const h   = w;
-    const lft = col * cellW + Math.random() * (cellW - 8) + 2;
-    const top = -20 + row * cellH + Math.random() * (cellH - 5) + 2;
-    const spd = 0.06 + Math.random() * 0.18;
-
-    topPcts.push(top);
-    el.dataset.speed = spd.toFixed(3);
-    el.dataset.rot   = '0';
-    el.style.cssText =
-      `width:${w|0}px;height:${h|0}px;` +
-      `left:${lft.toFixed(1)}%;top:${top.toFixed(1)}%;` +
-      `background-image:url('https://images.unsplash.com/${shuffled[i % shuffled.length]}?auto=format&fit=crop&w=300&q=75');`;
-
-    frag.appendChild(el);
-  }
-  section.insertBefore(frag, section.firstChild);
-
-  const imgs      = [...section.querySelectorAll('.float-img')];
-  const pos       = imgs.map(() => 0);
-  const mults     = imgs.map(img => Math.abs(parseFloat(img.dataset.speed)));
-  const rots      = imgs.map(img => parseFloat(img.dataset.rot));
-  const imgHeights = imgs.map(img => img.offsetHeight);
-
-  /* Tính initial top px để tính wrap boundary */
-  let sH        = section.offsetHeight;
-  let initTops  = topPcts.map(pct => pct / 100 * sH);
-
-  window.addEventListener('resize', () => {
-    sH = section.offsetHeight;
-    initTops = topPcts.map(pct => pct / 100 * sH);
-  }, { passive: true });
-
-  const BASE    = 0.3;
-  let dir       = 1;
-  let target    = BASE;
-  let current   = 0;
-  let lastY     = window.scrollY;
-  let idleTimer = null;
-
-  imgs.forEach((img, i) => {
-    img.style.transform = `translateY(0px) rotate(${rots[i]}deg)`;
-  });
-
-  window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    const d = y - lastY;
-    if (Math.abs(d) > 0.5) {
-      dir    = d > 0 ? -1 : 1;
-      target = dir * (BASE + Math.abs(d) * 0.07);
-      clearTimeout(idleTimer);
-      idleTimer = setTimeout(() => { target = dir * BASE; }, 150);
-    }
-    lastY = y;
-  }, { passive: true });
-
-  const FADE = 0.18; /* zone fade = 18% đầu và cuối section */
-
-  (function tick() {
-    current += (target - current) * 0.05;
-
-    imgs.forEach((img, i) => {
-      pos[i] += current * mults[i] * 22;
-
-      const absY  = initTops[i] + pos[i];
-      const imgH  = imgHeights[i];
-      const cycle = sH + imgH + 200;
-
-      /* Seamless wrap khi ảnh ra ngoài (opacity=0 lúc này nên vô hình) */
-      if (absY >  sH + imgH + 100) pos[i] -= cycle;
-      if (absY < -imgH - 100)      pos[i] += cycle;
-
-      /* Zone-based opacity + scale: mờ+nhỏ ở top/bottom, rõ+to ở center */
-      const normY = (initTops[i] + pos[i] + imgH * 0.5) / sH;
-      let alpha, scale;
-
-      if (normY <= 0 || normY >= 1) {
-        alpha = 0; scale = 0.8;
-      } else if (normY < FADE) {
-        const t = normY / FADE;
-        alpha = t; scale = 0.8 + 0.2 * t;
-      } else if (normY > 1 - FADE) {
-        const t = (1 - normY) / FADE;
-        alpha = t; scale = 0.8 + 0.2 * t;
-      } else {
-        alpha = 1; scale = 1;
-      }
-
-      img.style.opacity   = alpha.toFixed(3);
-      img.style.transform = `translateY(${pos[i]}px) scale(${scale.toFixed(3)})`;
+    /* Phase 1: fade out */
+    cards.forEach(function (c) {
+      c.classList.remove('is-entering');
+      c.classList.add('is-leaving');
     });
 
-    requestAnimationFrame(tick);
-  }());
+    /* Phase 2: after fade-out completes, update content then animate in */
+    swapTimer = setTimeout(function () {
+      cards.forEach(function (card, i) {
+        var p    = products[i];
+        var img  = card.querySelector('.mega-product-img');
+        var name = card.querySelector('.mega-product-name');
+        img.src  = B + p.img;
+        img.alt  = p.name;
+        name.textContent = p.name;
+      });
+      if (eyebrow) eyebrow.textContent = label;
+
+      cards.forEach(function (c) { c.classList.remove('is-leaving'); });
+      void grid.offsetWidth;
+      cards.forEach(function (c) { c.classList.add('is-entering'); });
+    }, 190);
+  }
+
+  document.querySelectorAll('.mega-col--collection .mega-link[data-mega-cat]').forEach(function (link) {
+    link.addEventListener('mouseenter', function () {
+      swap(link.dataset.megaCat, link.dataset.megaLabel || 'Sản phẩm tiêu biểu');
+    });
+  });
 }());
 
 /* ---------- Scroll-reveal: cat blocks + section dividers ---------- */
@@ -647,6 +579,18 @@ updateNav();
       wishBtn.setAttribute('aria-pressed', wished ? 'true' : 'false');
     });
   }
+
+  /* ── Mobile gallery: sync dots with scroll-snap ── */
+  (function () {
+    const gallery = document.getElementById('pdGallery');
+    const dots    = document.querySelectorAll('#pdGalleryDots .pd-gallery-dot');
+    if (!gallery || !dots.length) return;
+
+    gallery.addEventListener('scroll', function () {
+      var idx = Math.round(gallery.scrollLeft / gallery.clientWidth);
+      dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+    }, { passive: true });
+  }());
 
   /* ── Accordions — one open at a time ── */
   document.querySelectorAll('.pd-acc-trigger').forEach(trigger => {
