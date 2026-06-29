@@ -25,7 +25,7 @@
   --swatch-noir:   #1C1C1A;
 
   --font-display: 'Crimson Pro', Georgia, serif;
-  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-body:    'Be Vietnam Pro', system-ui, sans-serif;
 
   --nav-h:  68px;
   --ease:         0.3s ease;
@@ -404,7 +404,7 @@ img    { display: block; }
 }
 
 .cat-cta {
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: var(--font-body);
   font-style: normal;
   font-size: 10px;
   font-weight: 400;
@@ -657,7 +657,7 @@ img    { display: block; }
 ============================================ */
 .badge {
   display: inline-block;
-  font-family: 'DM Sans', system-ui, sans-serif;
+  font-family: var(--font-body);
   font-style: normal;
   font-size: 8px;
   font-weight: 500;
@@ -744,6 +744,7 @@ img    { display: block; }
   display: grid;
   grid-template-columns: 1fr 0.85fr 1.3fr 0.75fr;
   width: 100%;
+  min-height: calc(100dvh - var(--nav-h));
   background: var(--white);
   border-bottom: 0.5px solid var(--pebble);
   box-shadow: 0 20px 60px rgba(0,0,0,0.08);
@@ -955,9 +956,12 @@ img    { display: block; }
   position: fixed;
   inset: 0;
   z-index: 180;
+  background: rgba(0,0,0,0.25);
+  opacity: 0;
   pointer-events: none;
+  transition: opacity 0.38s ease;
 }
-.mega-wrap.open ~ .mega-overlay { pointer-events: all; }
+.mega-wrap.open ~ .mega-overlay { opacity: 1; pointer-events: all; }
 
 /* ── Responsive: tablet (≤1100px) ── */
 @media (max-width: 1100px) {
@@ -1685,7 +1689,7 @@ img    { display: block; }
 .shop-tabs { display: flex; align-items: center; }
 
 .shop-tab {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.01em;
@@ -2185,11 +2189,12 @@ img    { display: block; }
 
 .journal-view-all:hover .journal-view-all-arrow { transform: translateX(3px); }
 
-/* Grid — edge to edge, no gap */
+/* Grid — 4 cột, edge to edge */
 .journal-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 0;
+  align-items: start;
 }
 
 /* Card */
@@ -2200,17 +2205,19 @@ img    { display: block; }
   transform: translateY(32px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
+.journal-grid { align-items: stretch; }
 
 .journal-section.in-view .journal-card:nth-child(1) { opacity: 1; transform: none; }
-.journal-section.in-view .journal-card:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.14s; }
-.journal-section.in-view .journal-card:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.28s; }
+.journal-section.in-view .journal-card:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.10s; }
+.journal-section.in-view .journal-card:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.20s; }
+.journal-section.in-view .journal-card:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.30s; }
 
 /* Image */
 .journal-card-img-link { display: block; }
 
 .journal-card-img-wrap {
   overflow: hidden;
-  height: clamp(380px, 60vh, 620px);
+  aspect-ratio: 3 / 4;
   background: var(--stone);
 }
 
@@ -2225,15 +2232,20 @@ img    { display: block; }
 
 /* Card text */
 .journal-card-body {
-  padding: 28px 32px 0;
-  text-align: center;
+  padding: 18px 24px 28px;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 12px;
+  align-items: flex-start;
+  gap: 10px;
+  flex: 1;
 }
 
-.journal-card-title {
+.journal-card-excerpt {
+  flex: 1;
+}
+
+.journal-card-body .journal-card-title {
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 500;
@@ -2241,15 +2253,16 @@ img    { display: block; }
   text-transform: uppercase;
   color: var(--ink);
   line-height: 1.5;
+  text-decoration: none;
 }
 
 .journal-card-excerpt {
   font-family: var(--font-body);
   font-size: 13px;
-  font-weight: 300;
-  color: var(--ash);
+  font-weight: 400;
+  color: var(--graphite);
   line-height: 1.7;
-  max-width: 300px;
+  flex: 1;
 }
 
 .journal-card-cta {
@@ -2267,25 +2280,49 @@ img    { display: block; }
 .journal-card-cta:hover { text-decoration-color: var(--ink); }
 
 /* ---- Responsive ---- */
-@media (max-width: 1024px) {
+
+/* Tablet landscape: 3 cột nhưng thu gọn padding */
+@media (max-width: 1100px) {
   .journal-section { padding: 80px 0 100px; }
-  .journal-card-img-wrap { height: clamp(320px, 50vh, 520px); }
+  .journal-card-body { padding: 16px 20px 0; }
 }
 
-@media (max-width: 768px) {
+/* Tablet: 2 cột */
+@media (max-width: 960px) {
   .journal-grid {
-    grid-template-columns: 1fr;
-    gap: 48px;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1px;
+    row-gap: 40px;
+    background: none;
     padding: 0 var(--pad-x);
   }
-  .journal-card-img-wrap { height: clamp(280px, 55vw, 480px); }
-  .journal-card-body { padding: 20px 0 0; }
+  .journal-card { background: var(--warm-white); }
+  .journal-card-img-wrap { aspect-ratio: 4 / 5; }
 }
 
+/* Mobile: 1 cột */
 @media (max-width: 640px) {
-  .journal-section { padding: 64px 0 80px; }
-  .journal-header { padding: 0 24px 40px; }
-  .journal-grid { gap: 40px; padding: 0 24px; }
+  .journal-section { padding: 60px 0 80px; }
+  .journal-header { padding: 0 var(--pad-x) 36px; }
+  .journal-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+    background: none;
+    padding: 0 var(--pad-x);
+  }
+  .journal-card { background: transparent; border-bottom: 0.5px solid var(--pebble); padding-bottom: 40px; margin-bottom: 40px; }
+  .journal-card:last-child { border-bottom: none; margin-bottom: 0; }
+  .journal-card-img-wrap { aspect-ratio: 4 / 5; }
+  .journal-card-body { padding: 16px 0 0; }
+}
+
+/* Small mobile */
+@media (max-width: 400px) {
+  .journal-section { padding: 48px 0 64px; }
+  .journal-header { padding: 0 20px 28px; }
+  .journal-grid { padding: 0 20px; }
+  .journal-card-title { font-size: 11px; }
+  .journal-card-excerpt { font-size: 12px; }
 }
 
 /* ============================================
@@ -2509,27 +2546,6 @@ img    { display: block; }
   .footer-legal { padding: 12px 24px 24px; text-align: left; }
 }
 
-/* ============================================
-   Lerp Smooth Scroll
-   — chỉ active khi JS thêm class ls-active vào <html>
-   — touch devices + prefers-reduced-motion: JS không thêm class → fallback về native scroll
-============================================ */
-html.ls-active {
-  overflow-y: scroll;       /* html là scroll container → window.scrollY đọc từ đây */
-}
-
-html.ls-active body {
-  overflow: hidden;
-  height: 100vh;            /* clip body về viewport, smooth-wrap lo phần còn lại */
-}
-
-html.ls-active #smooth-wrap {
-  position: fixed;
-  top: 0; left: 0;
-  z-index: 0;               /* dưới navbar (z=200) và mega-menu (z=200) */
-  width: 100%;
-  will-change: transform;   /* GPU layer — tránh repaint toàn trang mỗi frame */
-}
 
 /* ============================================
    Reduced motion
@@ -2566,6 +2582,7 @@ html.ls-active #smooth-wrap {
   display: flex;
   align-items: center;
   gap: 4px;
+  line-height: 1.4;
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 400;
@@ -2583,7 +2600,7 @@ html.ls-active #smooth-wrap {
 .pd-layout {
   display: grid;
   grid-template-columns: 57fr 43fr;
-  align-items: start;
+  align-items: stretch;
 }
 
 /* ── Gallery column: vertical image strip ── */
@@ -2635,10 +2652,9 @@ html.ls-active #smooth-wrap {
 .pd-info-inner {
   position: sticky;
   top: calc(var(--nav-h) + 28px);
-  /* no max-height / no overflow — sticky container pattern:
-     panel floats while gallery scrolls, releases at gallery bottom */
   padding-bottom: 40px;
 }
+
 
 /* Eyebrow + title */
 .pd-eyebrow {
@@ -2714,10 +2730,10 @@ html.ls-active #smooth-wrap {
 }
 
 .pd-color-name {
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0.05em;
   text-transform: none;
-  color: var(--ash);
+  color: var(--graphite);
   font-size: 11px;
 }
 
@@ -2725,8 +2741,8 @@ html.ls-active #smooth-wrap {
 .pd-swatches { display: flex; gap: 10px; flex-wrap: wrap; }
 
 .pd-swatch {
-  width: 42px;
-  height: 42px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   border: 1px solid rgba(0,0,0,0.1);
   cursor: pointer;
@@ -2746,14 +2762,14 @@ html.ls-active #smooth-wrap {
 .pd-sizes { display: flex; gap: 6px; flex-wrap: wrap; }
 
 .pd-size-btn {
-  min-width: 52px;
-  height: 48px;
-  padding: 0 14px;
+  min-width: 38px;
+  height: 34px;
+  padding: 0 10px;
   border: 0.5px solid var(--pebble);
   border-radius: 3px;
   background: var(--white);
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.06em;
   color: var(--graphite);
@@ -2765,7 +2781,8 @@ html.ls-active #smooth-wrap {
   border-color: var(--graphite);
   color: var(--ink);
 }
-.pd-size-btn.active {
+.pd-size-btn.active,
+.pd-size-btn.active:hover {
   border-color: var(--ink);
   background: var(--ink);
   color: var(--white);
@@ -2789,22 +2806,22 @@ html.ls-active #smooth-wrap {
 
 .pd-size-guide {
   font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 300;
-  letter-spacing: 0.04em;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
   text-transform: none;
-  color: var(--ash);
+  color: var(--graphite);
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: var(--silver);
+  text-decoration-color: var(--graphite);
   transition: color 0.2s, text-decoration-color 0.2s;
 }
 .pd-size-guide:hover { color: var(--ink); text-decoration-color: var(--ink); }
 
 /* Wishlist — inline next to title */
 .pd-wish-btn {
-  width: 38px;
-  height: 38px;
+  width: 30px;
+  height: 30px;
   border: 0.5px solid var(--pebble);
   background: var(--white);
   display: flex;
@@ -2853,11 +2870,11 @@ html.ls-active #smooth-wrap {
 .pd-desc {
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 20px;
+  font-size: clamp(17px, 2.2vw, 24px);
   font-weight: 300;
-  line-height: 1.8;
+  line-height: 1.6;
   color: var(--graphite);
-  margin-bottom: 26px;
+  margin-bottom: 18px;
 }
 
 /* Accordions */
@@ -2876,6 +2893,7 @@ html.ls-active #smooth-wrap {
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 500;
+  line-height: 1.3;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--graphite);
@@ -2898,6 +2916,11 @@ html.ls-active #smooth-wrap {
 .pd-acc-body {
   max-height: 0;
   overflow: hidden;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--graphite);
   transition: max-height 0.42s cubic-bezier(0.4,0,0.2,1),
               padding-bottom 0.42s ease;
 }
@@ -3065,7 +3088,6 @@ html.ls-active #smooth-wrap {
     padding-bottom: 0;
   }
 
-  .pd-desc { font-size: 17px; }
 
   .pd-related-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
   .pd-related-header { padding-bottom: 28px; }
@@ -3085,7 +3107,9 @@ html.ls-active #smooth-wrap {
   .pd-related-header { flex-direction: column; align-items: flex-start; gap: 12px; }
   .pd-breadcrumb { padding-top: calc(var(--nav-h) + 20px); }
   .pd-title { font-size: clamp(24px, 7vw, 32px); }
-  .pd-size-btn { min-width: 44px; height: 42px; }
+  .pd-price-row { padding-bottom: 16px; margin-bottom: 16px; }
+  .pd-desc { font-size: 18px; }
+  .pd-size-btn { min-width: 32px; height: 30px; font-size: 11px; padding: 0 8px; }
   .pd-add-btn  { height: 50px; }
-  .pd-wish-btn { width: 50px; height: 50px; }
+  .pd-wish-btn { width: 28px; height: 28px; }
 }

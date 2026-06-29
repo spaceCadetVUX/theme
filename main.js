@@ -2,45 +2,6 @@
    LINNÉ — main.js
 ============================================ */
 
-/* smoothCur: lerp'd scroll position — shared giữa các IIFE */
-let smoothCur = 0;
-
-/* ---------- Lerp Smooth Scroll ---------- */
-(function () {
-  /* Tắt trên thiết bị touch (iOS/Android có native momentum rồi) */
-  if (window.matchMedia('(pointer: coarse)').matches) return;
-  /* Tắt khi user yêu cầu giảm chuyển động */
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-  const wrap = document.getElementById('smooth-wrap');
-  if (!wrap) return;
-
-  const LERP = 0.1; /* 8% mỗi frame ≈ 300ms để settle — điều chỉnh để thay đổi độ "nhớt" */
-  let cur = 0;       /* vị trí hiển thị hiện tại */
-  let tgt = 0;       /* scroll target thực */
-
-  /* Cho html biết tổng chiều cao content → scrollbar đúng kích thước */
-  function syncHeight() {
-    document.documentElement.style.height = wrap.scrollHeight + 'px';
-  }
-  syncHeight();
-  new ResizeObserver(syncHeight).observe(wrap);  /* cập nhật khi font/ảnh load xong */
-  window.addEventListener('resize', syncHeight, { passive: true });
-
-  /* Kích hoạt CSS rules (html.ls-active) — đặt sau syncHeight để đo trước khi layout đổi */
-  document.documentElement.classList.add('ls-active');
-
-  window.addEventListener('scroll', () => { tgt = window.scrollY; }, { passive: true });
-
-  (function tick() {
-    cur += (tgt - cur) * LERP;
-    /* Snap khi gần tới đích — tránh rAF loop chạy vô tận với micro-delta */
-    if (Math.abs(tgt - cur) < 0.05) cur = tgt;
-    smoothCur = cur; /* expose ra module scope cho các IIFE khác đọc */
-    wrap.style.transform = `translateY(${-cur}px)`;
-    requestAnimationFrame(tick);
-  }());
-}());
 
 /* ---------- Hero Logo: shrink on scroll → nav-logo fade in ---------- */
 (function () {
@@ -83,36 +44,6 @@ let smoothCur = 0;
   });
 }());
 
-/* ---------- Hero Caption: sticky bottom-of-viewport → dock tại đáy hero ---------- */
-(function () {
-  /* Chỉ chạy khi lerp scroll active (desktop, pointer: fine) */
-  if (!document.documentElement.classList.contains('ls-active')) return;
-
-  const hero    = document.getElementById('hero');
-  const caption = document.querySelector('.hero-caption');
-  if (!hero || !caption) return;
-
-  const MARGIN = 80; /* px từ bottom — đồng bộ với CSS bottom: 80px */
-
-  (function tick() {
-    const heroH    = hero.offsetHeight;       /* 130vh trong px */
-    const captionH = caption.offsetHeight;
-
-    /* Vị trí tự nhiên: đáy hero - 80px */
-    const naturalTop = heroH - captionH - MARGIN;
-
-    /* Vị trí sticky: đáy viewport - 80px, bù trừ theo lerp offset */
-    /* Khi smoothCur = 0  → top = viewportH - captionH - 80  (đáy màn hình) */
-    /* Khi smoothCur = 30vh → top = naturalTop               (vừa chạm đáy hero) */
-    const stickyTop = window.innerHeight - captionH - MARGIN + smoothCur;
-
-    /* Lấy giá trị nhỏ hơn: sticky kéo xuống nhưng không vượt quá đáy hero */
-    caption.style.bottom = 'auto';
-    caption.style.top    = Math.min(naturalTop, stickyTop) + 'px';
-
-    requestAnimationFrame(tick);
-  }());
-}());
 
 /* ---------- Navbar: transparent ↔ filled ---------- */
 const navbar = document.getElementById('navbar');
@@ -505,35 +436,6 @@ updateNav();
 (function () {
   if (!document.querySelector('.pd-section')) return;
 
-  /* ── Sticky info panel (JS simulation — CSS sticky breaks inside ls-active fixed wrap) ──
-     Approach: every rAF, read gallery's current visual rect via getBoundingClientRect().
-     Both .pd-gallery and .pd-info start at the same grid-row Y.
-     Push .pd-info-inner down by delta so its top stays at OFFSET from viewport.
-     Release (stop pushing) when info would overflow gallery bottom.
-  */
-  (function () {
-    if (!document.documentElement.classList.contains('ls-active')) return;
-
-    const info    = document.getElementById('pdInfoInner');
-    const gallery = document.getElementById('pdGallery');
-    if (!info || !gallery) return;
-
-    const navH   = parseFloat(getComputedStyle(document.documentElement)
-                     .getPropertyValue('--nav-h')) || 68;
-    const OFFSET = navH + 28;
-
-    (function tick() {
-      const gr    = gallery.getBoundingClientRect();
-      const infoH = info.offsetHeight;
-
-      const rawDelta = OFFSET - gr.top;                   /* how far to push down */
-      const maxDelta = gr.height - infoH - 24;            /* stop before overflowing gallery */
-      const delta    = Math.max(0, Math.min(rawDelta, maxDelta));
-
-      info.style.transform = `translateY(${delta.toFixed(2)}px)`;
-      requestAnimationFrame(tick);
-    }());
-  }());
 
   /* ── Colour swatches ── */
   const swatches   = document.querySelectorAll('.pd-swatch');
@@ -591,6 +493,7 @@ updateNav();
       dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
     }, { passive: true });
   }());
+
 
   /* ── Accordions — one open at a time ── */
   document.querySelectorAll('.pd-acc-trigger').forEach(trigger => {
