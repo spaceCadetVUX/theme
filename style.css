@@ -1552,7 +1552,7 @@ img    { display: block; }
 .feat-product {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: min(88vh, 860px);
+  min-height: min(70vh, 688px);
 }
 
 /* ---- Left: editorial + overlay ---- */
@@ -1582,42 +1582,42 @@ img    { display: block; }
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 48px 80px;
+  padding: 0 38px 64px;
   text-align: center;
   background: linear-gradient(to top, rgba(0,0,0,0.58) 0%, rgba(0,0,0,0.08) 55%, transparent 100%);
 }
 
 .feat-product-overlay-eyebrow {
   font-family: var(--font-body);
-  font-size: 9.5px;
+  font-size: 8px;
   font-weight: 400;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.65);
-  margin-bottom: 14px;
+  margin-bottom: 11px;
 }
 
 .feat-product-overlay-title {
   font-family: var(--font-display);
-  font-size: clamp(30px, 3.6vw, 58px);
+  font-size: clamp(24px, 2.9vw, 46px);
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--white);
   line-height: 1.08;
-  margin-bottom: 32px;
+  margin-bottom: 26px;
 }
 
 .feat-product-overlay-btn {
   display: inline-block;
   font-family: var(--font-body);
-  font-size: 9.5px;
+  font-size: 8px;
   font-weight: 500;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--white);
   border: 0.5px solid rgba(255,255,255,0.55);
-  padding: 11px 28px;
+  padding: 9px 22px;
   transition: background 0.22s ease, color 0.22s ease;
 }
 .feat-product-overlay-btn:hover { background: var(--white); color: var(--ink); }
@@ -1629,7 +1629,7 @@ img    { display: block; }
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 56px 32px 52px;
+  padding: 45px 26px 42px;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.9s ease 0.14s, transform 0.9s ease 0.14s;
@@ -1642,7 +1642,6 @@ img    { display: block; }
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
 }
 
 .feat-slider {
@@ -1688,39 +1687,39 @@ img    { display: block; }
 /* Caption */
 .feat-product-caption {
   text-align: center;
-  margin-top: 14px;
+  margin-top: 16px;
 }
 
 .feat-product-name {
   font-family: var(--font-display);
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 400;
   font-style: italic;
   color: var(--ink);
-  margin-bottom: 6px;
+  margin-bottom: 5px;
   letter-spacing: 0.01em;
   transition: opacity 0.3s ease;
 }
 
 .feat-product-price {
   font-family: var(--font-body);
-  font-size: 21px;
+  font-size: 17px;
   font-weight: 300;
   letter-spacing: 0.04em;
   color: var(--graphite);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   transition: opacity 0.3s ease;
 }
 
 .feat-dots {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .feat-dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: var(--pebble);
   cursor: pointer;
@@ -1850,10 +1849,9 @@ img    { display: block; }
 }
 
 .shop-card-name {
-  font-family: var(--font-display);
-  font-size: 17px;
-  font-weight: 400;
-  font-style: italic;
+  font-family: var(--font-body);
+  font-size: 19px;
+  font-weight: 200;
   letter-spacing: 0.01em;
   color: var(--ink);
   display: block;
@@ -1925,7 +1923,7 @@ img    { display: block; }
 
 @media (max-width: 768px) {
   /* 768px trở xuống → 2 cột */
-  .shop-grid { grid-template-columns: repeat(2, 1fr); margin-top: 24px; }
+  .shop-grid { grid-template-columns: repeat(2, 1fr); margin-top: 24px; row-gap: 48px; }
   .shop-section { padding-bottom: 56px; }
   .shop-header { padding: 28px 20px 24px; justify-content: flex-start; }
   .shop-tab { font-size: 10px; padding: 0 12px; }
@@ -3670,7 +3668,7 @@ img    { display: block; }
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 4px;
-  row-gap: 48px;
+  row-gap: 80px;
   background: var(--white);
 }
 

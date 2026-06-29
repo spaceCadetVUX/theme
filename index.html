@@ -332,6 +332,64 @@
 
   </section>
 
+  <!-- ==============================  FEATURED PRODUCT 2 (reversed)  ============================== -->
+  <section class="feat-product" id="featProduct2">
+
+    <!-- Left: product slider -->
+    <div class="feat-product-right">
+      <div class="feat-slider-wrap">
+        <button class="feat-nav feat-nav--prev" aria-label="Sản phẩm trước">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+
+        <div class="feat-slider">
+          <div class="feat-slide is-active" data-name="Váy midi linen" data-price="780.000 ₫">
+            <img src="https://elleandriley.com/cdn/shop/files/Slim_Tee_BrownMelange2.jpg?v=1778217470&width=1200" alt="Váy midi linen" class="feat-slide-img">
+          </div>
+          <div class="feat-slide" data-name="Áo linen oversized" data-price="680.000 ₫">
+            <img src="https://elleandriley.com/cdn/shop/files/Slim_Tee_Birch.jpg?v=1778217589&width=1200" alt="Áo linen oversized" class="feat-slide-img">
+          </div>
+          <div class="feat-slide" data-name="Khăn bandana linen" data-price="320.000 ₫">
+            <img src="https://elleandriley.com/cdn/shop/files/Bandana-Scarf-Sand-Cream3.jpg?v=1781216151&width=1200" alt="Khăn bandana linen" class="feat-slide-img">
+          </div>
+          <div class="feat-slide" data-name="Áo linen xanh nhạt" data-price="640.000 ₫">
+            <img src="https://elleandriley.com/cdn/shop/files/Slim_tee_Pale_Blue.jpg?v=1778216637&width=1200" alt="Áo linen xanh nhạt" class="feat-slide-img">
+          </div>
+        </div>
+
+        <button class="feat-nav feat-nav--next" aria-label="Sản phẩm tiếp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+
+      <div class="feat-product-caption">
+        <p class="feat-product-name" id="featName2">Váy midi linen</p>
+        <p class="feat-product-price" id="featPrice2">780.000 ₫</p>
+        <div class="feat-dots">
+          <span class="feat-dot is-active"></span>
+          <span class="feat-dot"></span>
+          <span class="feat-dot"></span>
+          <span class="feat-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: editorial image -->
+    <div class="feat-product-left">
+      <img
+        src="https://elleandriley.com/cdn/shop/files/Slim_Tee_BrownMelange.jpg?v=1778217470&width=2160"
+        alt="LINNÉ — Quần &amp; Váy"
+        class="feat-product-editorial"
+      >
+      <div class="feat-product-overlay">
+        <p class="feat-product-overlay-eyebrow">Quần &amp; Váy · Thu 2026</p>
+        <h2 class="feat-product-overlay-title">PHONG CÁCH<br>TỐI GIẢN</h2>
+        <a href="#" class="feat-product-overlay-btn">Khám phá</a>
+      </div>
+    </div>
+
+  </section>
+
 
       <!-- ==============================  DUAL EDITORIAL  ============================== -->
   <section class="dual-edit" id="dualEdit">
@@ -779,12 +837,14 @@
 
   <script src="main.js"></script>
   <script>
-    // Featured product slider
-    (function () {
-      var slides  = document.querySelectorAll('.feat-slide');
-      var dots    = document.querySelectorAll('.feat-dot');
-      var nameEl  = document.getElementById('featName');
-      var priceEl = document.getElementById('featPrice');
+    // Featured product slider — factory dùng chung cho cả 2 section
+    function initFeatSlider(sectionId, nameId, priceId) {
+      var sec    = document.getElementById(sectionId);
+      if (!sec) return;
+      var slides  = sec.querySelectorAll('.feat-slide');
+      var dots    = sec.querySelectorAll('.feat-dot');
+      var nameEl  = document.getElementById(nameId);
+      var priceEl = document.getElementById(priceId);
       var current = 0;
 
       function goTo(index) {
@@ -794,8 +854,6 @@
         current = (index + slides.length) % slides.length;
         slides[current].classList.add('is-active');
         dots[current].classList.add('is-active');
-
-        // fade caption out → update → fade in
         nameEl.style.opacity = priceEl.style.opacity = '0';
         setTimeout(function () {
           nameEl.textContent  = slides[current].dataset.name;
@@ -804,10 +862,14 @@
         }, 300);
       }
 
-      document.querySelector('.feat-nav--prev').addEventListener('click', function () { goTo(current - 1); });
-      document.querySelector('.feat-nav--next').addEventListener('click', function () { goTo(current + 1); });
+      sec.querySelector('.feat-nav--prev').addEventListener('click', function () { goTo(current - 1); });
+      sec.querySelector('.feat-nav--next').addEventListener('click', function () { goTo(current + 1); });
       dots.forEach(function (dot, i) { dot.addEventListener('click', function () { goTo(i); }); });
-    })();
+    }
+
+    initFeatSlider('featProduct',  'featName',  'featPrice');
+    initFeatSlider('featProduct2', 'featName2', 'featPrice2');
+
   </script>
 </body>
 </html>

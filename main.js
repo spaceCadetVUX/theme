@@ -294,29 +294,30 @@ updateNav();
   function stopAuto() { clearInterval(autoTimer); }
 
   /* -------------------------------------------------------
-     Navigate — translateX slide, không opacity, không blink
-     dir +1 = forward (next), dir -1 = backward (prev)
+     Navigate — crossfade + subtle zoom (editorial style)
   ------------------------------------------------------- */
-  const OUT_MS = 220;  // tốc độ trượt ra
-  const IN_MS  = 300;  // tốc độ trượt vào (hơi chậm hơn cho mượt)
+  const FADE_OUT = 240;
+  const FADE_IN  = 500;
+  const EASE_IN  = 'cubic-bezier(0.16, 1, 0.3, 1)'; // ease-out-expo
+  const DRIFT    = 32; // px — đủ để cảm nhận hướng, không lộ liễu
 
   function goTo(rawIdx) {
     if (locked) return;
     const next = ((rawIdx % N) + N) % N;
     if (next === cur) return;
-
-    const dir = rawIdx > cur ? 1 : -1;
     locked = true;
 
-    // Phase 1: trượt TẤT CẢ ảnh ra ngoài theo hướng dir
+    const dir = rawIdx > cur ? 1 : -1;
+
+    // Phase 1: fade out + drift nhẹ theo hướng
     items.forEach((item, pos) => {
       const img = item.querySelector('.tiktok-img');
-      img.style.transition = `transform ${OUT_MS}ms linear`;
-      img.style.transform  = `scale(${SCALES[pos]}) translateX(${-dir * 105}%)`;
+      img.style.transition = `opacity ${FADE_OUT}ms ease, transform ${FADE_OUT}ms ease`;
+      img.style.opacity    = '0';
+      img.style.transform  = `scale(${SCALES[pos]}) translateX(${-dir * DRIFT}px)`;
     });
 
     setTimeout(() => {
-      // ảnh đang ngoài viewport — swap src không nhìn thấy
       cur = next;
       items.forEach((item, pos) => {
         const idx = ((cur - CENTER + pos) % N + N) % N;
@@ -324,40 +325,39 @@ updateNav();
         const img = item.querySelector('.tiktok-img');
         img.src = s.img;
         img.alt = s.name;
-        // đặt sẵn ở phía đối diện, không transition
+        // đặt sẵn từ phía đối diện, invisible
         img.style.transition = 'none';
-        img.style.transform  = `scale(${SCALES[pos]}) translateX(${dir * 105}%)`;
+        img.style.opacity    = '0';
+        img.style.transform  = `scale(${SCALES[pos]}) translateX(${dir * DRIFT}px)`;
       });
 
       syncBottom();
       syncVideoPlayback();
       startAuto();
 
-      // Phase 2: trượt vào từ phía đối diện
+      // Phase 2: fade in + drift về 0
       requestAnimationFrame(() => requestAnimationFrame(() => {
         items.forEach((item, pos) => {
           const img = item.querySelector('.tiktok-img');
-          img.style.transition = `transform ${IN_MS}ms linear`;
+          img.style.transition = `opacity ${FADE_IN}ms ease, transform ${FADE_IN}ms ${EASE_IN}`;
+          img.style.opacity    = '1';
           img.style.transform  = `scale(${SCALES[pos]}) translateX(0)`;
         });
 
-        // Dọn inline style — disable CSS transition TRƯỚC khi clear transform
-        // để browser không trigger CSS 0.9s ease khi chuyển từ
-        // "scale(X) translateX(0)" → "scale(X)" (nếu không sẽ bị dật ngược)
         setTimeout(() => {
           items.forEach(item => {
             const img = item.querySelector('.tiktok-img');
-            img.style.transition = 'none'; // freeze: CSS transform áp dụng NGAY, không animate
+            img.style.transition = 'none';
             img.style.transform  = '';
-            // Restore CSS transition sau 2 frame để hover effect hoạt động trở lại
+            img.style.opacity    = '';
             requestAnimationFrame(() => requestAnimationFrame(() => {
               img.style.transition = '';
             }));
           });
           locked = false;
-        }, IN_MS + 20);
+        }, FADE_IN + 20);
       }));
-    }, OUT_MS + 8);
+    }, FADE_OUT + 16);
   }
 
   /* --- Events --- */
