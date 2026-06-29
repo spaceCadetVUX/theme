@@ -3209,6 +3209,7 @@ img    { display: block; }
   display: flex;
   align-items: center;
   height: 100%;
+  flex: 1;
 }
 
 /* Filter toggle */
