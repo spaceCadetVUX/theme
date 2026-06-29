@@ -275,28 +275,61 @@
 
   <!-- ==============================  FEATURED PRODUCT  ============================== -->
   <section class="feat-product" id="featProduct">
+
+    <!-- Left: editorial + overlay text -->
     <div class="feat-product-left">
       <img
         src="https://elleandriley.com/cdn/shop/files/Cashmere_Crew_Camel3.jpg?v=1779070696&width=2160"
-        alt="LINNÉ — Đầm linen cổ chữ V"
+        alt="LINNÉ — Bộ sưu tập Thu 2026"
         class="feat-product-editorial"
       >
+      <div class="feat-product-overlay">
+        <p class="feat-product-overlay-eyebrow">Bộ sưu tập · Thu 2026</p>
+        <h2 class="feat-product-overlay-title">BỘ SƯU TẬP<br>MÙA THU</h2>
+        <a href="#" class="feat-product-overlay-btn">Khám phá</a>
+      </div>
     </div>
+
+    <!-- Right: product slider -->
     <div class="feat-product-right">
-      <p class="feat-product-eyebrow">Sản phẩm mới</p>
-      <h2 class="feat-product-name">ĐẦM LINEN<br>CỔ CHỮ V</h2>
-      <div class="feat-product-meta">
-        <span class="feat-product-price">1.290.000 ₫</span>
-        <a href="#" class="feat-product-shop">Mua ngay</a>
+      <div class="feat-slider-wrap">
+        <button class="feat-nav feat-nav--prev" aria-label="Sản phẩm trước">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+
+        <div class="feat-slider">
+          <div class="feat-slide is-active" data-name="Đầm linen cổ chữ V" data-price="1.290.000 ₫">
+            <img src="https://elleandriley.com/cdn/shop/files/Bandana-Scarf-Sand-Cream3.jpg?v=1781216151&width=1200" alt="Đầm linen cổ chữ V" class="feat-slide-img">
+          </div>
+          <div class="feat-slide" data-name="Áo blouse thắt nơ" data-price="720.000 ₫">
+            <img src="https://elleandriley.com/cdn/shop/files/Bandana-Scarf-Black-Sand_80abcf68-ce45-46c1-8665-8419cb22e876.jpg?v=1781216042&width=1200" alt="Áo blouse thắt nơ" class="feat-slide-img">
+          </div>
+          <div class="feat-slide" data-name="Áo Cashmere cổ tròn" data-price="890.000 ₫">
+            <img src="https://elleandriley.com/cdn/shop/files/Cashmere_Crew_Black.jpg?v=1779070489&width=1200" alt="Áo Cashmere cổ tròn" class="feat-slide-img">
+          </div>
+          <div class="feat-slide" data-name="Áo crop linen" data-price="620.000 ₫">
+            <img src="https://elleandriley.com/cdn/shop/files/Slim_Tee_Red.jpg?v=1778217693&width=1200" alt="Áo crop linen" class="feat-slide-img">
+          </div>
+        </div>
+
+        <button class="feat-nav feat-nav--next" aria-label="Sản phẩm tiếp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
-      <div class="feat-product-thumb-wrap">
-        <img
-          src="https://elleandriley.com/cdn/shop/files/Bandana-Scarf-Sand-Cream3.jpg?v=1781216151&width=2160"
-          alt="Đầm linen cổ chữ V — chi tiết sản phẩm"
-          class="feat-product-thumb"
-        >
+
+      <!-- Caption: updates via JS -->
+      <div class="feat-product-caption">
+        <p class="feat-product-name" id="featName">Đầm linen cổ chữ V</p>
+        <p class="feat-product-price" id="featPrice">1.290.000 ₫</p>
+        <div class="feat-dots">
+          <span class="feat-dot is-active"></span>
+          <span class="feat-dot"></span>
+          <span class="feat-dot"></span>
+          <span class="feat-dot"></span>
+        </div>
       </div>
     </div>
+
   </section>
 
 
@@ -355,12 +388,11 @@
           <span class="shop-badge">Mới</span>
         </div>
         <div class="shop-card-info">
-          <div class="shop-card-row">
-            <span class="shop-card-name">Áo linen cổ chữ V</span>
-            <span class="shop-card-price">660.000 ₫</span>
-          </div>
+          <span class="shop-card-name">Áo linen cổ chữ V</span>
+          <p class="shop-card-meta">100% Linen · Cổ chữ V</p>
+          <span class="shop-card-price">660.000 ₫</span>
           <div class="shop-card-swatches">
-            <span class="shop-swatch swatch-cream active"></span>
+            <span class="shop-swatch swatch-cream"></span>
             <span class="shop-swatch swatch-forest"></span>
             <span class="shop-swatch swatch-slate"></span>
           </div>
@@ -374,13 +406,12 @@
           <span class="shop-badge">Mới</span>
         </div>
         <div class="shop-card-info">
-          <div class="shop-card-row">
-            <span class="shop-card-name">Áo blouse thắt nơ</span>
-            <span class="shop-card-price">720.000 ₫</span>
-          </div>
+          <span class="shop-card-name">Áo blouse thắt nơ</span>
+          <p class="shop-card-meta">100% Linen · Thắt nơ</p>
+          <span class="shop-card-price">720.000 ₫</span>
           <div class="shop-card-swatches">
             <span class="shop-swatch swatch-cream"></span>
-            <span class="shop-swatch swatch-camel active"></span>
+            <span class="shop-swatch swatch-camel"></span>
             <span class="shop-swatch swatch-cognac"></span>
             <span class="shop-swatch swatch-noir"></span>
           </div>
@@ -394,13 +425,12 @@
           <span class="shop-badge">Mới</span>
         </div>
         <div class="shop-card-info">
-          <div class="shop-card-row">
-            <span class="shop-card-name">Áo crop linen</span>
-            <span class="shop-card-price">620.000 ₫</span>
-          </div>
+          <span class="shop-card-name">Áo crop linen</span>
+          <p class="shop-card-meta">100% Linen · Crop fit</p>
+          <span class="shop-card-price">620.000 ₫</span>
           <div class="shop-card-swatches">
             <span class="shop-swatch swatch-cream"></span>
-            <span class="shop-swatch swatch-rust active"></span>
+            <span class="shop-swatch swatch-rust"></span>
             <span class="shop-swatch swatch-noir"></span>
             <span class="shop-swatch swatch-forest"></span>
           </div>
@@ -414,12 +444,11 @@
           <span class="shop-badge">Mới</span>
         </div>
         <div class="shop-card-info">
-          <div class="shop-card-row">
-            <span class="shop-card-name">Áo linen oversized</span>
-            <span class="shop-card-price">680.000 ₫</span>
-          </div>
+          <span class="shop-card-name">Áo linen oversized</span>
+          <p class="shop-card-meta">100% Linen · Oversized</p>
+          <span class="shop-card-price">680.000 ₫</span>
           <div class="shop-card-swatches">
-            <span class="shop-swatch swatch-cream active"></span>
+            <span class="shop-swatch swatch-cream"></span>
             <span class="shop-swatch swatch-slate"></span>
             <span class="shop-swatch swatch-noir"></span>
           </div>
@@ -447,12 +476,11 @@
           <span class="shop-badge">Mới</span>
         </div>
         <div class="shop-card-info">
-          <div class="shop-card-row">
-            <span class="shop-card-name">Áo linen cổ chữ V</span>
-            <span class="shop-card-price">660.000 ₫</span>
-          </div>
+          <span class="shop-card-name">Áo linen cổ chữ V</span>
+          <p class="shop-card-meta">100% Linen · Cổ chữ V</p>
+          <span class="shop-card-price">660.000 ₫</span>
           <div class="shop-card-swatches">
-            <span class="shop-swatch swatch-cream active"></span>
+            <span class="shop-swatch swatch-cream"></span>
             <span class="shop-swatch swatch-forest"></span>
             <span class="shop-swatch swatch-slate"></span>
           </div>
@@ -466,13 +494,12 @@
           <span class="shop-badge">Mới</span>
         </div>
         <div class="shop-card-info">
-          <div class="shop-card-row">
-            <span class="shop-card-name">Áo blouse thắt nơ</span>
-            <span class="shop-card-price">720.000 ₫</span>
-          </div>
+          <span class="shop-card-name">Áo blouse thắt nơ</span>
+          <p class="shop-card-meta">100% Linen · Thắt nơ</p>
+          <span class="shop-card-price">720.000 ₫</span>
           <div class="shop-card-swatches">
             <span class="shop-swatch swatch-cream"></span>
-            <span class="shop-swatch swatch-camel active"></span>
+            <span class="shop-swatch swatch-camel"></span>
             <span class="shop-swatch swatch-cognac"></span>
             <span class="shop-swatch swatch-noir"></span>
           </div>
@@ -486,13 +513,12 @@
           <span class="shop-badge">Mới</span>
         </div>
         <div class="shop-card-info">
-          <div class="shop-card-row">
-            <span class="shop-card-name">Áo crop linen</span>
-            <span class="shop-card-price">620.000 ₫</span>
-          </div>
+          <span class="shop-card-name">Áo crop linen</span>
+          <p class="shop-card-meta">100% Linen · Crop fit</p>
+          <span class="shop-card-price">620.000 ₫</span>
           <div class="shop-card-swatches">
             <span class="shop-swatch swatch-cream"></span>
-            <span class="shop-swatch swatch-rust active"></span>
+            <span class="shop-swatch swatch-rust"></span>
             <span class="shop-swatch swatch-noir"></span>
             <span class="shop-swatch swatch-forest"></span>
           </div>
@@ -506,12 +532,11 @@
           <span class="shop-badge">Mới</span>
         </div>
         <div class="shop-card-info">
-          <div class="shop-card-row">
-            <span class="shop-card-name">Áo linen oversized</span>
-            <span class="shop-card-price">680.000 ₫</span>
-          </div>
+          <span class="shop-card-name">Áo linen oversized</span>
+          <p class="shop-card-meta">100% Linen · Oversized</p>
+          <span class="shop-card-price">680.000 ₫</span>
           <div class="shop-card-swatches">
-            <span class="shop-swatch swatch-cream active"></span>
+            <span class="shop-swatch swatch-cream"></span>
             <span class="shop-swatch swatch-slate"></span>
             <span class="shop-swatch swatch-noir"></span>
           </div>
@@ -753,5 +778,36 @@
   </div><!-- /#smooth-wrap -->
 
   <script src="main.js"></script>
+  <script>
+    // Featured product slider
+    (function () {
+      var slides  = document.querySelectorAll('.feat-slide');
+      var dots    = document.querySelectorAll('.feat-dot');
+      var nameEl  = document.getElementById('featName');
+      var priceEl = document.getElementById('featPrice');
+      var current = 0;
+
+      function goTo(index) {
+        if (index === current) return;
+        slides[current].classList.remove('is-active');
+        dots[current].classList.remove('is-active');
+        current = (index + slides.length) % slides.length;
+        slides[current].classList.add('is-active');
+        dots[current].classList.add('is-active');
+
+        // fade caption out → update → fade in
+        nameEl.style.opacity = priceEl.style.opacity = '0';
+        setTimeout(function () {
+          nameEl.textContent  = slides[current].dataset.name;
+          priceEl.textContent = slides[current].dataset.price;
+          nameEl.style.opacity = priceEl.style.opacity = '1';
+        }, 300);
+      }
+
+      document.querySelector('.feat-nav--prev').addEventListener('click', function () { goTo(current - 1); });
+      document.querySelector('.feat-nav--next').addEventListener('click', function () { goTo(current + 1); });
+      dots.forEach(function (dot, i) { dot.addEventListener('click', function () { goTo(i); }); });
+    })();
+  </script>
 </body>
 </html>
