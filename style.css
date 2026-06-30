@@ -6396,11 +6396,18 @@ a.shop-card-name:hover { color: var(--ash); }
   margin: 0 var(--pad-x);
 }
 
-/* Related posts */
+/* Related posts slider */
 .jnl-post-related {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 80px var(--pad-x) 0;
+  padding: 80px 0 0;
+  overflow: hidden;
+}
+
+.jnl-related-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--pad-x);
+  margin-bottom: 40px;
 }
 
 .jnl-post-related-hd {
@@ -6409,13 +6416,50 @@ a.shop-card-name:hover { color: var(--ash); }
   font-weight: 300;
   font-style: italic;
   color: var(--ink);
-  margin-bottom: 40px;
+  margin-bottom: 0;
 }
 
-.jnl-post-related-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px 24px;
+.jnl-related-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.jnl-related-btn {
+  width: 40px;
+  height: 40px;
+  border: 0.5px solid var(--pebble);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.jnl-related-btn:hover  { border-color: var(--ink); }
+.jnl-related-btn:disabled { opacity: 0.3; cursor: default; }
+
+.jnl-related-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding: 0 var(--pad-x) 80px;
+  cursor: grab;
+  user-select: none;
+}
+
+.jnl-related-track::-webkit-scrollbar { display: none; }
+
+.jnl-related-track .journal-card {
+  flex: 0 0 25%;
+  min-width: 0;
+  scroll-snap-align: start;
+  opacity: 1 !important;
+  transform: none !important;
 }
 
 /* Reuse .jnl-card from journal.html CSS */
@@ -6530,7 +6574,7 @@ a.shop-card-name:hover { color: var(--ash); }
 
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
-  .jnl-post-related-grid { grid-template-columns: repeat(2, 1fr); }
+  .jnl-related-track .journal-card { flex: 0 0 50%; }
   .jnl-post-layout {
     grid-template-columns: 1fr;
     column-gap: 0;
@@ -6548,9 +6592,9 @@ a.shop-card-name:hover { color: var(--ash); }
 }
 
 @media (max-width: 768px) {
+  .jnl-related-track .journal-card { flex: 0 0 80%; }
   .jnl-post-layout .jnl-post-body { padding: 48px 0 32px; gap: 22px; }
   .jnl-post-body { padding: 48px var(--pad-x); gap: 22px; }
   .jnl-post-pull { padding: 24px 0 24px 20px; }
   .jnl-post-figure-duo { grid-template-columns: 1fr; gap: 4px; }
-  .jnl-post-related-grid { grid-template-columns: 1fr; }
 }

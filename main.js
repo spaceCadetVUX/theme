@@ -511,3 +511,34 @@ updateNav();
     });
   });
 }());
+
+/* ---------- Related posts slider ---------- */
+(function () {
+  const section = document.querySelector('.jnl-post-related');
+  if (!section) return;
+  const track   = section.querySelector('.jnl-related-track');
+  const prevBtn = section.querySelector('.jnl-related-btn--prev');
+  const nextBtn = section.querySelector('.jnl-related-btn--next');
+  if (!track) return;
+
+  function cardW() {
+    const c = track.querySelector('.journal-card');
+    return c ? c.offsetWidth : 0;
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => track.scrollBy({ left: -cardW(), behavior: 'smooth' }));
+  if (nextBtn) nextBtn.addEventListener('click', () => track.scrollBy({ left:  cardW(), behavior: 'smooth' }));
+
+  let px = null, sx = 0;
+  track.addEventListener('pointerdown', e => {
+    px = e.clientX; sx = track.scrollLeft;
+    track.setPointerCapture(e.pointerId);
+    track.style.cursor = 'grabbing';
+  });
+  track.addEventListener('pointermove', e => {
+    if (px === null) return;
+    track.scrollLeft = sx - (e.clientX - px);
+  });
+  track.addEventListener('pointerup',     () => { px = null; track.style.cursor = 'grab'; });
+  track.addEventListener('pointercancel', () => { px = null; track.style.cursor = 'grab'; });
+}());
