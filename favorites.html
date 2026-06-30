@@ -233,230 +233,176 @@
   <!-- smooth-wrap: tất cả section scrollable — navbar/mega nằm ngoài (fixed) -->
   <div id="smooth-wrap">
 
-    <!-- ==============================  PLP BANNER  ============================== -->
-    <section class="plp-banner">
-      <img
-        src="https://elleandriley.com/cdn/shop/files/Cashmere_Crew_Camel3.jpg?v=1779070696&width=2400"
-        alt="Bộ sưu tập Áo Linen Thu 2026 — LINNÉ"
-        class="plp-banner-img"
-      >
-      <div class="plp-banner-overlay"></div>
-      <div class="plp-banner-caption">
-        <p class="plp-banner-eyebrow">Bộ sưu tập · Thu 2026</p>
-        <h1 class="plp-banner-title">Áo Linen</h1>
-        <p class="plp-banner-sub">18 sản phẩm</p>
-      </div>
-    </section>
+    <!-- ==============================  FAVORITES PAGE  ============================== -->
+    <div class="fav-page">
 
-    <!-- ==============================  FILTER TOOLBAR  ============================== -->
-    <div class="plp-toolbar-wrap">
-
-      <div class="plp-toolbar">
-        <div class="plp-toolbar-left">
-          <button class="plp-filter-toggle" id="plpFilterToggle" aria-expanded="false">
-            <svg width="14" height="10" viewBox="0 0 20 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <line x1="0" y1="1" x2="20" y2="1"/><line x1="3" y1="7" x2="17" y2="7"/><line x1="7" y1="13" x2="13" y2="13"/>
-            </svg>
-            Lọc
-          </button>
-          <nav class="plp-cats" aria-label="Lọc theo danh mục">
-            <button class="plp-cat active" data-cat="all">Tất cả</button>
-            <button class="plp-cat" data-cat="ao">Áo</button>
-            <button class="plp-cat" data-cat="quan-vay">Quần &amp; Váy</button>
-            <button class="plp-cat" data-cat="bo-set">Bộ set</button>
-            <button class="plp-cat" data-cat="phu-kien">Phụ kiện</button>
-          </nav>
-        </div>
-        <div class="plp-toolbar-right">
-          <span class="plp-count" id="plpCount">18 sản phẩm</span>
-          <div class="plp-sort-wrap">
-            <span class="plp-sort-label">Sắp xếp:</span>
-            <button class="plp-sort-btn" id="plpSortBtn">
-              <span class="plp-sort-label-text">Nổi bật</span>
-              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" class="plp-sort-chevron" aria-hidden="true">
-                <polyline points="6 9 12 15 18 9"/>
-              </svg>
-            </button>
-            <div class="plp-sort-dropdown" id="plpSortDropdown">
-              <button class="plp-sort-option active">Nổi bật</button>
-              <button class="plp-sort-option">Mới nhất</button>
-              <button class="plp-sort-option">Giá: Thấp → Cao</button>
-              <button class="plp-sort-option">Giá: Cao → Thấp</button>
-            </div>
-          </div>
-        </div>
+      <!-- Header -->
+      <div class="fav-hd">
+        <p class="fav-hd-eyebrow">LINNÉ · Yêu thích</p>
+        <h1 class="fav-hd-title">Danh sách yêu thích <em id="favCountLabel">(8)</em></h1>
       </div>
 
-    </div><!-- /.plp-toolbar-wrap -->
+      <!-- Product grid -->
+      <div class="fav-grid">
 
-    <!-- ==============================  PRODUCT GRID  ============================== -->
-    <section class="plp-grid-section shop-section" id="plpGridSection">
-      <div class="plp-grid">
-
-        <div class="shop-card" data-category="ao">
-          <a href="product-details.html" class="shop-card-img-link">
-            <div class="shop-card-img-wrap">
+        <!-- Card 1: Áo linen cổ chữ V -->
+        <article class="shop-card fav-card">
+          <div class="shop-card-img-wrap">
+            <a href="product-details.html">
               <img src="https://elleandriley.com/cdn/shop/files/Cashmere_Crew_Black.jpg?v=1779070489&width=1200" alt="Áo linen cổ chữ V" class="shop-card-img">
               <img src="https://elleandriley.com/cdn/shop/files/Cashmere_Crew_Black4.jpg?v=1779070489&width=1200" alt="" class="shop-card-img-alt" aria-hidden="true">
-              <span class="shop-badge">Mới</span>
-            </div>
-          </a>
-          <div class="shop-card-info">
-            <a href="product-details.html" class="shop-card-name">Áo linen cổ chữ V</a>
-            <p class="shop-card-meta">100% Linen · Cổ chữ V</p>
-            <span class="shop-card-price">660.000 ₫</span>
-            <div class="shop-card-swatches">
-              <span class="shop-swatch swatch-cream active"></span>
-              <span class="shop-swatch swatch-forest"></span>
-              <span class="shop-swatch swatch-slate"></span>
-            </div>
+            </a>
+            <button class="fav-card-del" aria-label="Bỏ yêu thích">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
           </div>
-        </div>
+          <div class="shop-card-body">
+            <a href="product-details.html" class="shop-card-name">Áo linen cổ chữ V</a>
+            <span class="shop-card-price">660.000 ₫</span>
+            <button class="fav-atc">Thêm vào giỏ</button>
+          </div>
+        </article>
 
-        <div class="shop-card" data-category="ao">
-          <a href="product-details.html" class="shop-card-img-link">
-            <div class="shop-card-img-wrap">
+        <!-- Card 2: Áo blouse thắt nơ -->
+        <article class="shop-card fav-card">
+          <div class="shop-card-img-wrap">
+            <a href="product-details.html">
               <img src="https://elleandriley.com/cdn/shop/files/Bandana-Scarf-Black-Sand_80abcf68-ce45-46c1-8665-8419cb22e876.jpg?v=1781216042&width=1200" alt="Áo blouse thắt nơ" class="shop-card-img">
               <img src="https://elleandriley.com/cdn/shop/files/Bandana-Scarf-Black-Sand3.jpg?v=1781216042&width=1200" alt="" class="shop-card-img-alt" aria-hidden="true">
-              <span class="shop-badge">Mới</span>
-            </div>
-          </a>
-          <div class="shop-card-info">
-            <a href="product-details.html" class="shop-card-name">Áo blouse thắt nơ</a>
-            <p class="shop-card-meta">100% Linen · Thắt nơ</p>
-            <span class="shop-card-price">720.000 ₫</span>
-            <div class="shop-card-swatches">
-              <span class="shop-swatch swatch-cream"></span>
-              <span class="shop-swatch swatch-camel active"></span>
-              <span class="shop-swatch swatch-cognac"></span>
-              <span class="shop-swatch swatch-noir"></span>
-            </div>
+            </a>
+            <button class="fav-card-del" aria-label="Bỏ yêu thích">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
           </div>
-        </div>
+          <div class="shop-card-body">
+            <a href="product-details.html" class="shop-card-name">Áo blouse thắt nơ</a>
+            <span class="shop-card-price">720.000 ₫</span>
+            <button class="fav-atc">Thêm vào giỏ</button>
+          </div>
+        </article>
 
-        <div class="shop-card" data-category="ao">
-          <a href="product-details.html" class="shop-card-img-link">
-            <div class="shop-card-img-wrap">
+        <!-- Card 3: Áo crop linen -->
+        <article class="shop-card fav-card">
+          <div class="shop-card-img-wrap">
+            <a href="product-details.html">
               <img src="https://elleandriley.com/cdn/shop/files/Slim_Tee_Red.jpg?v=1778217693&width=1200" alt="Áo crop linen" class="shop-card-img">
               <img src="https://elleandriley.com/cdn/shop/files/Slim_Tee_Red2.jpg?v=1778217693&width=1200" alt="" class="shop-card-img-alt" aria-hidden="true">
-              <span class="shop-badge">Mới</span>
-            </div>
-          </a>
-          <div class="shop-card-info">
-            <a href="product-details.html" class="shop-card-name">Áo crop linen</a>
-            <p class="shop-card-meta">100% Linen · Crop fit</p>
-            <span class="shop-card-price">620.000 ₫</span>
-            <div class="shop-card-swatches">
-              <span class="shop-swatch swatch-cream"></span>
-              <span class="shop-swatch swatch-rust active"></span>
-              <span class="shop-swatch swatch-noir"></span>
-              <span class="shop-swatch swatch-forest"></span>
-            </div>
+            </a>
+            <button class="fav-card-del" aria-label="Bỏ yêu thích">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
           </div>
-        </div>
+          <div class="shop-card-body">
+            <a href="product-details.html" class="shop-card-name">Áo crop linen</a>
+            <span class="shop-card-price">620.000 ₫</span>
+            <button class="fav-atc">Thêm vào giỏ</button>
+          </div>
+        </article>
 
-        <div class="shop-card" data-category="ao">
-          <a href="product-details.html" class="shop-card-img-link">
-            <div class="shop-card-img-wrap">
+        <!-- Card 4: Áo linen oversized -->
+        <article class="shop-card fav-card">
+          <div class="shop-card-img-wrap">
+            <a href="product-details.html">
               <img src="https://elleandriley.com/cdn/shop/files/Slim_Tee_Birch.jpg?v=1778217589&width=1200" alt="Áo linen oversized" class="shop-card-img">
               <img src="https://elleandriley.com/cdn/shop/files/Slim_Tee_Birch3.jpg?v=1778217589&width=1200" alt="" class="shop-card-img-alt" aria-hidden="true">
-            </div>
-          </a>
-          <div class="shop-card-info">
-            <a href="product-details.html" class="shop-card-name">Áo linen oversized</a>
-            <p class="shop-card-meta">100% Linen · Oversized</p>
-            <span class="shop-card-price">680.000 ₫</span>
-            <div class="shop-card-swatches">
-              <span class="shop-swatch swatch-cream active"></span>
-              <span class="shop-swatch swatch-slate"></span>
-              <span class="shop-swatch swatch-noir"></span>
-            </div>
+            </a>
+            <button class="fav-card-del" aria-label="Bỏ yêu thích">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
           </div>
-        </div>
+          <div class="shop-card-body">
+            <a href="product-details.html" class="shop-card-name">Áo linen oversized</a>
+            <span class="shop-card-price">680.000 ₫</span>
+            <button class="fav-atc">Thêm vào giỏ</button>
+          </div>
+        </article>
 
-        <div class="shop-card" data-category="ao">
-          <a href="product-details.html" class="shop-card-img-link">
-            <div class="shop-card-img-wrap">
+        <!-- Card 5: Áo Cashmere cổ tròn -->
+        <article class="shop-card fav-card">
+          <div class="shop-card-img-wrap">
+            <a href="product-details.html">
               <img src="https://elleandriley.com/cdn/shop/files/Cashmere_Crew_Black4.jpg?v=1779070489&width=1200" alt="Áo Cashmere cổ tròn" class="shop-card-img">
               <img src="https://elleandriley.com/cdn/shop/files/Cashmere_Crew_Camel3.jpg?v=1779070696&width=1200" alt="" class="shop-card-img-alt" aria-hidden="true">
-              <span class="shop-badge shop-badge--limited">Giới hạn</span>
-            </div>
-          </a>
-          <div class="shop-card-info">
-            <a href="product-details.html" class="shop-card-name">Áo Cashmere cổ tròn</a>
-            <p class="shop-card-meta">100% Cashmere · Phiên bản giới hạn</p>
-            <span class="shop-card-price">890.000 ₫</span>
-            <div class="shop-card-swatches">
-              <span class="shop-swatch swatch-noir active"></span>
-              <span class="shop-swatch swatch-camel"></span>
-              <span class="shop-swatch swatch-cream"></span>
-            </div>
+            </a>
+            <span class="shop-card-badge">Mới</span>
+            <button class="fav-card-del" aria-label="Bỏ yêu thích">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
           </div>
-        </div>
+          <div class="shop-card-body">
+            <a href="product-details.html" class="shop-card-name">Áo Cashmere cổ tròn</a>
+            <span class="shop-card-price">890.000 ₫</span>
+            <button class="fav-atc">Thêm vào giỏ</button>
+          </div>
+        </article>
 
-        <div class="shop-card" data-category="ao">
-          <a href="product-details.html" class="shop-card-img-link">
-            <div class="shop-card-img-wrap">
+        <!-- Card 6: Áo linen xanh nhạt -->
+        <article class="shop-card fav-card">
+          <div class="shop-card-img-wrap">
+            <a href="product-details.html">
               <img src="https://elleandriley.com/cdn/shop/files/Slim_tee_Pale_Blue.jpg?v=1778216637&width=1200" alt="Áo linen xanh nhạt" class="shop-card-img">
               <img src="https://elleandriley.com/cdn/shop/files/Slim_Tee_BrownMelange.jpg?v=1778217470&width=1200" alt="" class="shop-card-img-alt" aria-hidden="true">
-            </div>
-          </a>
-          <div class="shop-card-info">
-            <a href="product-details.html" class="shop-card-name">Áo linen xanh nhạt</a>
-            <p class="shop-card-meta">100% Linen · Slim fit</p>
-            <span class="shop-card-price">640.000 ₫</span>
-            <div class="shop-card-swatches">
-              <span class="shop-swatch swatch-slate active"></span>
-              <span class="shop-swatch swatch-cream"></span>
-              <span class="shop-swatch swatch-cognac"></span>
-            </div>
+            </a>
+            <button class="fav-card-del" aria-label="Bỏ yêu thích">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
           </div>
-        </div>
+          <div class="shop-card-body">
+            <a href="product-details.html" class="shop-card-name">Áo linen xanh nhạt</a>
+            <span class="shop-card-price">640.000 ₫</span>
+            <button class="fav-atc">Thêm vào giỏ</button>
+          </div>
+        </article>
 
-        <div class="shop-card" data-category="quan-vay">
-          <a href="product-details.html" class="shop-card-img-link">
-            <div class="shop-card-img-wrap">
+        <!-- Card 7: Váy midi linen -->
+        <article class="shop-card fav-card">
+          <div class="shop-card-img-wrap">
+            <a href="product-details.html">
               <img src="https://elleandriley.com/cdn/shop/files/Slim_Tee_BrownMelange2.jpg?v=1778217470&width=1200" alt="Váy midi linen" class="shop-card-img">
               <img src="https://elleandriley.com/cdn/shop/files/Slim_Tee_BrownMelange.jpg?v=1778217470&width=1200" alt="" class="shop-card-img-alt" aria-hidden="true">
-              <span class="shop-badge">Mới</span>
-            </div>
-          </a>
-          <div class="shop-card-info">
-            <a href="product-details.html" class="shop-card-name">Váy midi linen</a>
-            <p class="shop-card-meta">100% Linen · Dài midi</p>
-            <span class="shop-card-price">780.000 ₫</span>
-            <div class="shop-card-swatches">
-              <span class="shop-swatch swatch-camel active"></span>
-              <span class="shop-swatch swatch-cream"></span>
-              <span class="shop-swatch swatch-noir"></span>
-            </div>
+            </a>
+            <button class="fav-card-del" aria-label="Bỏ yêu thích">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
           </div>
-        </div>
+          <div class="shop-card-body">
+            <a href="product-details.html" class="shop-card-name">Váy midi linen</a>
+            <span class="shop-card-price">780.000 ₫</span>
+            <button class="fav-atc">Thêm vào giỏ</button>
+          </div>
+        </article>
 
-        <div class="shop-card" data-category="phu-kien">
-          <a href="product-details.html" class="shop-card-img-link">
-            <div class="shop-card-img-wrap">
+        <!-- Card 8: Khăn bandana linen -->
+        <article class="shop-card fav-card">
+          <div class="shop-card-img-wrap">
+            <a href="product-details.html">
               <img src="https://elleandriley.com/cdn/shop/files/Bandana-Scarf-Sand-Cream3.jpg?v=1781216151&width=1200" alt="Khăn bandana linen" class="shop-card-img">
               <img src="https://elleandriley.com/cdn/shop/files/Bandana-Scarf-Black-Sand3.jpg?v=1781216042&width=1200" alt="" class="shop-card-img-alt" aria-hidden="true">
-            </div>
-          </a>
-          <div class="shop-card-info">
-            <a href="product-details.html" class="shop-card-name">Khăn bandana linen</a>
-            <p class="shop-card-meta">100% Linen · 70 × 70 cm</p>
-            <span class="shop-card-price">320.000 ₫</span>
-            <div class="shop-card-swatches">
-              <span class="shop-swatch swatch-cream active"></span>
-              <span class="shop-swatch swatch-camel"></span>
-            </div>
+            </a>
+            <button class="fav-card-del" aria-label="Bỏ yêu thích">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </button>
           </div>
-        </div>
+          <div class="shop-card-body">
+            <a href="product-details.html" class="shop-card-name">Khăn bandana linen</a>
+            <span class="shop-card-price">320.000 ₫</span>
+            <button class="fav-atc">Thêm vào giỏ</button>
+          </div>
+        </article>
 
-      </div><!-- /.plp-grid -->
+      </div><!-- /.fav-grid -->
 
-      <div class="plp-load-more">
-        <button class="plp-load-btn">Xem thêm <span>→</span></button>
+      <!-- Continue shopping -->
+      <div class="fav-continue">
+        <a href="product-page.html" class="cart-continue-link">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+          </svg>
+          Khám phá thêm
+        </a>
       </div>
-    </section><!-- /.plp-grid-section -->
+
+    </div><!-- /.fav-page -->
 
 
 
@@ -543,148 +489,6 @@
 
   </div><!-- /#smooth-wrap -->
 
-  <!-- ==============================  FILTER MODAL  ============================== -->
-  <div class="plp-fmodal" id="plpFmodal" aria-hidden="true">
-    <div class="plp-fmodal-overlay" id="plpFmodalOverlay"></div>
-    <div class="plp-fmodal-panel" role="dialog" aria-label="Bộ lọc sản phẩm">
-
-      <div class="plp-fmodal-head">
-        <span class="plp-fmodal-title">Bộ lọc</span>
-        <button class="plp-fmodal-close" id="plpFmodalClose" aria-label="Đóng bộ lọc">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
-            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
-      </div>
-
-      <div class="plp-fmodal-body">
-
-        <div class="plp-fmodal-group">
-          <p class="plp-fmodal-group-label">Màu sắc</p>
-          <div class="plp-fmodal-swatches">
-            <button class="plp-filter-swatch swatch-cream" title="Cream" aria-label="Cream"></button>
-            <button class="plp-filter-swatch swatch-camel" title="Camel" aria-label="Camel"></button>
-            <button class="plp-filter-swatch swatch-cognac" title="Cognac" aria-label="Cognac"></button>
-            <button class="plp-filter-swatch swatch-rust" title="Rust" aria-label="Rust"></button>
-            <button class="plp-filter-swatch swatch-forest" title="Forest" aria-label="Forest"></button>
-            <button class="plp-filter-swatch swatch-slate" title="Slate" aria-label="Slate"></button>
-            <button class="plp-filter-swatch swatch-noir" title="Noir" aria-label="Noir"></button>
-          </div>
-        </div>
-
-        <div class="plp-fmodal-group">
-          <p class="plp-fmodal-group-label">Size</p>
-          <div class="plp-filter-options">
-            <button class="plp-filter-option plp-filter-option--size">XS</button>
-            <button class="plp-filter-option plp-filter-option--size">S</button>
-            <button class="plp-filter-option plp-filter-option--size">M</button>
-            <button class="plp-filter-option plp-filter-option--size">L</button>
-            <button class="plp-filter-option plp-filter-option--size">XL</button>
-          </div>
-        </div>
-
-        <div class="plp-fmodal-group">
-          <p class="plp-fmodal-group-label">Giá</p>
-          <div class="plp-filter-options">
-            <button class="plp-filter-option">Dưới 500K</button>
-            <button class="plp-filter-option">500K – 800K</button>
-            <button class="plp-filter-option">Trên 800K</button>
-          </div>
-        </div>
-
-      </div><!-- /.plp-fmodal-body -->
-
-      <div class="plp-fmodal-foot">
-        <button class="plp-fmodal-btn-clear">Xóa tất cả</button>
-        <button class="plp-fmodal-btn-apply">Xem kết quả</button>
-      </div>
-
-    </div><!-- /.plp-fmodal-panel -->
-  </div><!-- /.plp-fmodal -->
-
   <script src="main.js"></script>
-  <script>
-    // PLP — Category filter
-    (function () {
-      const cats = document.querySelectorAll('.plp-cat');
-      const cards = document.querySelectorAll('.plp-grid .shop-card');
-      cats.forEach(function (cat) {
-        cat.addEventListener('click', function () {
-          cats.forEach(function (c) { c.classList.remove('active'); });
-          cat.classList.add('active');
-          var sel = cat.dataset.cat;
-          cards.forEach(function (card) {
-            card.style.display = (sel === 'all' || card.dataset.category === sel) ? '' : 'none';
-          });
-        });
-      });
-
-      // Filter modal
-      var filterBtn  = document.getElementById('plpFilterToggle');
-      var fmodal     = document.getElementById('plpFmodal');
-      var fmodalClose = document.getElementById('plpFmodalClose');
-      var fmodalOverlay = document.getElementById('plpFmodalOverlay');
-
-      function openFilter() {
-        fmodal.classList.add('open');
-        fmodal.setAttribute('aria-hidden', 'false');
-        filterBtn.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-      function closeFilter() {
-        fmodal.classList.remove('open');
-        fmodal.setAttribute('aria-hidden', 'true');
-        filterBtn.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      if (filterBtn) filterBtn.addEventListener('click', openFilter);
-      if (fmodalClose) fmodalClose.addEventListener('click', closeFilter);
-      if (fmodalOverlay) fmodalOverlay.addEventListener('click', closeFilter);
-      document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeFilter(); });
-
-      // Sort dropdown
-      var sortBtn = document.getElementById('plpSortBtn');
-      var sortDrop = document.getElementById('plpSortDropdown');
-      if (sortBtn && sortDrop) {
-        sortBtn.addEventListener('click', function (e) {
-          e.stopPropagation();
-          var isOpen = sortDrop.classList.toggle('open');
-          sortBtn.classList.toggle('open', isOpen);
-        });
-        sortDrop.querySelectorAll('.plp-sort-option').forEach(function (opt) {
-          opt.addEventListener('click', function () {
-            sortDrop.querySelectorAll('.plp-sort-option').forEach(function (o) { o.classList.remove('active'); });
-            opt.classList.add('active');
-            sortBtn.querySelector('.plp-sort-label-text').textContent = opt.textContent;
-            sortDrop.classList.remove('open');
-            sortBtn.classList.remove('open');
-          });
-        });
-        document.addEventListener('click', function () {
-          sortDrop.classList.remove('open');
-          sortBtn.classList.remove('open');
-        });
-      }
-
-      // Filter pills / swatches toggle
-      document.querySelectorAll('.plp-filter-option, .plp-filter-swatch').forEach(function (el) {
-        el.addEventListener('click', function () { el.classList.toggle('active'); });
-      });
-
-      // Clear + apply inside modal
-      var clearBtn = document.querySelector('.plp-fmodal-btn-clear');
-      if (clearBtn) {
-        clearBtn.addEventListener('click', function () {
-          document.querySelectorAll('.plp-filter-option.active, .plp-filter-swatch.active').forEach(function (el) {
-            el.classList.remove('active');
-          });
-        });
-      }
-      var applyBtn = document.querySelector('.plp-fmodal-btn-apply');
-      if (applyBtn) applyBtn.addEventListener('click', closeFilter);
-
-    })();
-  </script>
 </body>
 </html>
