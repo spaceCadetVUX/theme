@@ -258,6 +258,7 @@
       <section class="about-manifesto">
         <div class="about-manifesto-inner">
           <p class="about-manifesto-pre">Triết lý của chúng tôi</p>
+          <div class="about-manifesto-rule" aria-hidden="true"></div>
           <blockquote class="about-manifesto-quote">
             <span class="about-manifesto-line">Ít hơn,</span>
             <span class="about-manifesto-line">nhưng tốt hơn.</span>
@@ -275,8 +276,10 @@
         <div class="about-story-inner">
 
           <!-- Left: year -->
-          <div class="about-story-year-col">
-            <span class="about-story-year">2018</span>
+          <div class="about-story-pull">
+            <span class="about-story-pull-mark">&ldquo;</span>
+            <p class="about-story-pull-quote">tại sao thời trang phải phức tạp?</p>
+            <span class="about-story-pull-year">2018</span>
           </div>
 
           <!-- Right: content -->
@@ -436,6 +439,13 @@
           </div>
         </div>
 
+        <!-- Mobile dot indicators (hidden on desktop via CSS) -->
+        <div class="about-sticky-dots" aria-hidden="true">
+          <span class="about-sticky-dot active"></span>
+          <span class="about-sticky-dot"></span>
+          <span class="about-sticky-dot"></span>
+        </div>
+
       </section>
 
       <!-- ⑦ STATS BAR -->
@@ -495,8 +505,8 @@
             Chúng tôi không làm thời trang — chúng tôi làm những thứ bạn sẽ mặc mười năm nữa.
           </blockquote>
           <footer class="about-fq-footer">
-            <span class="about-fq-name">Linh An</span>
-            <span class="about-fq-role">Người sáng lập, LINNÉ</span>
+            <span class="about-fq-name">MINH VŨ</span>
+            <span class="about-fq-role">Người code trang này muỗn trĩ</span>
           </footer>
         </div>
 
@@ -663,18 +673,34 @@
     }, { threshold: 0.2 });
     document.querySelectorAll('.about-manifesto, .about-story, .about-mat, .about-values, .about-fq').forEach(el => revealObserver.observe(el));
 
+    // Section 2 — Manifesto parallax
+    (function () {
+      const section = document.querySelector('.about-manifesto');
+      const inner   = document.querySelector('.about-manifesto-inner');
+      if (!section || !inner) return;
+      window.addEventListener('scroll', function () {
+        const rect = section.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > window.innerHeight) return;
+        inner.style.transform = 'translateY(' + (-rect.top * 0.13) + 'px)';
+      }, { passive: true });
+    })();
+
     // Section 6 — Sticky scroll narrative
     (function () {
       const imgSlides  = document.querySelectorAll('.about-sticky-slide');
       const textSlides = document.querySelectorAll('.about-sticky-slide-text');
       const bar        = document.querySelector('.about-sticky-progress-bar');
+      const dots       = document.querySelectorAll('.about-sticky-dot');
+      const right      = document.querySelector('.about-sticky-right');
       if (!imgSlides.length) return;
 
       const activate = (idx) => {
         textSlides.forEach((t, i) => t.classList.toggle('active', i === idx));
+        dots.forEach((d, i) => d.classList.toggle('active', i === idx));
         if (bar) bar.style.width = ((idx + 1) / imgSlides.length * 100) + '%';
       };
 
+      // Desktop: IntersectionObserver on vertical scroll
       const stickyObs = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -685,6 +711,14 @@
       }, { threshold: 0.5 });
 
       imgSlides.forEach(s => stickyObs.observe(s));
+
+      // Mobile: carousel scroll → sync active text + dots
+      if (right) {
+        right.addEventListener('scroll', function () {
+          const idx = Math.round(right.scrollLeft / right.offsetWidth);
+          activate(idx);
+        }, { passive: true });
+      }
     })();
   </script>
 </body>
