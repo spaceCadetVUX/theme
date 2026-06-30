@@ -6079,6 +6079,7 @@ a.shop-card-name:hover { color: var(--ash); }
 .jnl-post-page {
   background: var(--white);
   padding-bottom: 120px;
+  overflow-x: hidden;
 }
 
 /* Hero image */
@@ -6102,6 +6103,64 @@ a.shop-card-name:hover { color: var(--ash); }
   margin: 0 auto;
   padding: 64px var(--pad-x) 56px;
   border-bottom: 0.5px solid var(--pebble);
+}
+
+/* Typographic hero (Option C) */
+.jnl-post-typo-hero {
+  background: var(--stone);
+  padding: 80px var(--pad-x) 0;
+  border-bottom: 0.5px solid var(--silver);
+}
+
+.jnl-post-typo-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 80px;
+}
+
+.jnl-post-back {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.jnl-post-back:hover { color: var(--ink); }
+
+.jnl-post-no {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+
+.jnl-post-typo-inner {
+  max-width: 960px;
+  padding-bottom: 96px;
+}
+
+.jnl-post-typo-hero .jnl-post-meta {
+  margin-bottom: 48px;
+}
+
+.jnl-post-typo-hero .jnl-post-title {
+  font-size: clamp(3.2rem, 7.5vw, 6.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-bottom: 36px;
+}
+
+.jnl-post-typo-hero .jnl-post-subtitle {
+  max-width: 560px;
+  font-size: 16px;
+  line-height: 1.75;
+  margin-bottom: 48px;
 }
 
 .jnl-post-meta {
@@ -6234,6 +6293,18 @@ a.shop-card-name:hover { color: var(--ash); }
   display: block;
 }
 
+/* First article figure — tall editorial anchor */
+.jnl-post-figure--hero {
+  margin: 0 0 4px;
+}
+
+.jnl-post-figure--hero .jnl-post-figure-img {
+  height: 72vh;
+  min-height: 320px;
+  object-fit: cover;
+  object-position: center 25%;
+}
+
 .jnl-post-caption {
   display: block;
   font-family: var(--font-body);
@@ -6349,14 +6420,135 @@ a.shop-card-name:hover { color: var(--ash); }
 
 /* Reuse .jnl-card from journal.html CSS */
 
+/* Option B: Two-column sticky sidebar */
+
+.jnl-post-layout {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  column-gap: 80px;
+  align-items: start;
+}
+
+.jnl-post-layout .jnl-post-body {
+  max-width: none;
+  margin: 0;
+  padding: 64px 0 80px;
+}
+
+.jnl-post-layout .jnl-post-share {
+  max-width: none;
+  padding: 40px 0 0;
+  margin: 0;
+}
+
+.jnl-post-rail {
+  position: sticky;
+  top: 88px;
+  padding-top: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.jnl-rail-title {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin-bottom: 16px;
+}
+
+.jnl-rail-toc-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.jnl-rail-toc-link {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--ash);
+  text-decoration: none;
+  display: block;
+  padding-left: 12px;
+  border-left: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.jnl-rail-toc-link:hover,
+.jnl-rail-toc-link.active {
+  color: var(--ink);
+  border-left-color: var(--ink);
+}
+
+.jnl-rail-divider {
+  width: 24px;
+  height: 0.5px;
+  background: var(--pebble);
+}
+
+.jnl-rail-author {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.jnl-rail-author-name {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+}
+
+.jnl-rail-author-role {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--graphite);
+}
+
+.jnl-rail-tag-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.jnl-rail-tag-list .jnl-post-tag-item {
+  display: block;
+  width: fit-content;
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
   .jnl-post-related-grid { grid-template-columns: repeat(2, 1fr); }
+  .jnl-post-layout {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+  .jnl-post-layout .jnl-post-body { padding-bottom: 40px; }
+  .jnl-post-rail {
+    position: static;
+    padding: 40px 0 64px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 40px;
+    border-top: 0.5px solid var(--pebble);
+  }
+  .jnl-rail-divider { display: none; }
 }
 
 @media (max-width: 768px) {
-  .jnl-post-hero { height: 56vw; }
-  .jnl-post-hd   { padding: 48px var(--pad-x) 40px; }
+  .jnl-post-layout .jnl-post-body { padding: 48px 0 32px; gap: 22px; }
   .jnl-post-body { padding: 48px var(--pad-x); gap: 22px; }
   .jnl-post-pull { padding: 24px 0 24px 20px; }
   .jnl-post-figure-duo { grid-template-columns: 1fr; gap: 4px; }
