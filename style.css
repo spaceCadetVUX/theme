@@ -5837,3 +5837,142 @@ a.shop-card-name:hover { color: var(--ash); }
   .about-fq-content  { padding: 56px var(--pad-x); }
   .about-fq-mark     { font-size: 7rem; }
 }
+
+/* ============================================================
+   ABOUT — § 9 CTA PRODUCT REEL
+   ============================================================ */
+
+.about-cta {
+  background: var(--cream, #f5f2ee);
+  padding-top: 120px;
+  overflow: hidden;
+}
+
+/* Header block */
+.about-cta-head {
+  text-align: center;
+  padding: 0 var(--pad-x) 80px;
+}
+
+.about-cta-eyebrow {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  margin-bottom: 20px;
+}
+
+.about-cta-title {
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 6vw, 6rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 40px;
+}
+
+.about-cta-title em {
+  font-style: italic;
+}
+
+.about-cta-btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border-bottom: 0.5px solid var(--ink);
+  padding-bottom: 3px;
+  text-decoration: none;
+  transition: opacity 0.2s ease, letter-spacing 0.3s ease;
+}
+
+.about-cta-btn:hover {
+  opacity: 0.55;
+  letter-spacing: 0.24em;
+}
+
+/* Reel wrapper */
+.about-cta-reel-wrap {
+  overflow: hidden;
+  width: 100%;
+}
+
+@keyframes about-cta-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.about-cta-reel {
+  display: flex;
+  width: max-content;
+  animation: about-cta-scroll 38s linear infinite;
+}
+
+.about-cta-reel:hover {
+  animation-play-state: paused;
+}
+
+.about-cta-reel-inner {
+  display: flex;
+  gap: 4px;
+}
+
+/* Individual thumbnail */
+.about-cta-thumb {
+  position: relative;
+  display: block;
+  width: 300px;
+  height: 420px;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.about-cta-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+.about-cta-thumb:hover img {
+  transform: scale(1.06);
+}
+
+/* Hover overlay label */
+.about-cta-thumb-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 20px 18px;
+  background: linear-gradient(to top, rgba(18,18,18,0.55) 0%, transparent 50%);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--white);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.about-cta-thumb:hover .about-cta-thumb-label {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-cta { padding-top: 80px; }
+  .about-cta-head { padding-bottom: 56px; }
+  .about-cta-thumb { width: 220px; height: 300px; }
+  .about-cta-reel { animation-duration: 24s; }
+}
