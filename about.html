@@ -438,6 +438,70 @@
 
       </section>
 
+      <!-- ⑦ STATS BAR -->
+      <section class="about-stats" aria-label="Thống kê">
+        <div class="about-stats-overflow">
+          <div class="about-stats-track">
+
+            <!-- Set A -->
+            <div class="about-stats-inner">
+              <span class="about-stats-num">1.200+</span>
+              <span class="about-stats-label">khách hàng</span>
+              <span class="about-stats-sep">·</span>
+              <span class="about-stats-num">6</span>
+              <span class="about-stats-label">năm</span>
+              <span class="about-stats-sep">·</span>
+              <span class="about-stats-num">100%</span>
+              <span class="about-stats-label">vải tự nhiên</span>
+              <span class="about-stats-sep">·</span>
+              <span class="about-stats-num">0</span>
+              <span class="about-stats-label">chất tổng hợp</span>
+              <span class="about-stats-sep">·</span>
+            </div>
+
+            <!-- Set B — duplicate for seamless loop -->
+            <div class="about-stats-inner" aria-hidden="true">
+              <span class="about-stats-num">1.200+</span>
+              <span class="about-stats-label">khách hàng</span>
+              <span class="about-stats-sep">·</span>
+              <span class="about-stats-num">6</span>
+              <span class="about-stats-label">năm</span>
+              <span class="about-stats-sep">·</span>
+              <span class="about-stats-num">100%</span>
+              <span class="about-stats-label">vải tự nhiên</span>
+              <span class="about-stats-sep">·</span>
+              <span class="about-stats-num">0</span>
+              <span class="about-stats-label">chất tổng hợp</span>
+              <span class="about-stats-sep">·</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ⑧ FOUNDER QUOTE -->
+      <section class="about-fq">
+
+        <!-- Portrait -->
+        <div class="about-fq-portrait">
+          <img src="https://elleandriley.com/cdn/shop/files/Cashmere_Crew_Camel3.jpg?v=1779070696&width=2160"
+               alt="Người sáng lập LINNÉ" class="about-fq-img">
+        </div>
+
+        <!-- Quote -->
+        <div class="about-fq-content">
+          <div class="about-fq-mark">&ldquo;</div>
+          <blockquote class="about-fq-quote">
+            Chúng tôi không làm thời trang — chúng tôi làm những thứ bạn sẽ mặc mười năm nữa.
+          </blockquote>
+          <footer class="about-fq-footer">
+            <span class="about-fq-name">Linh An</span>
+            <span class="about-fq-role">Người sáng lập, LINNÉ</span>
+          </footer>
+        </div>
+
+      </section>
+
     </div><!-- /.about-page -->
 
 
@@ -531,7 +595,7 @@
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in-view'); revealObserver.unobserve(e.target); } });
     }, { threshold: 0.2 });
-    document.querySelectorAll('.about-manifesto, .about-story, .about-mat, .about-values').forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.about-manifesto, .about-story, .about-mat, .about-values, .about-fq').forEach(el => revealObserver.observe(el));
 
     // Section 6 — Sticky scroll narrative
     (function () {
